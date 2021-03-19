@@ -1,0 +1,114 @@
+@import '../utils.scss';
+
+.navbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.logo {
+    @include flexbox;
+    @include align-items(center);
+
+    font-size: 28px;
+    font-family: $cursive-font-family;
+
+    color: $dark-brown;
+}
+
+.logoSecondary {
+    line-height: 24px;
+    letter-spacing: 3px;
+    font-size: 20px;
+    font-family: $serif-font-family;
+
+    margin-left: 10px;
+}
+
+.link {
+    position: relative;
+
+    padding: 5px 15px;
+
+    font-weight: $medium-fw;
+    font-size: 20px;
+    line-height: 22px;
+    font-family: $serif-font-family;
+    color: $dark-brown;
+    transition: all 0.4s ease-in-out;
+
+    &:not(:last-child) {
+        margin-right: 5px;
+    }
+
+    &:hover,
+    &:focus {
+        z-index: 1;
+
+        color: $white;
+
+        &:after {
+            z-index: -10;
+
+            @include animation(fill 0.7s forwards);
+            opacity: 1;
+        }
+    }
+
+    &:after {
+        bottom: 0;
+        left: 0;
+        right: 0;
+        position: absolute;
+
+        margin: 0;
+        width: 0%;
+        height: 1px;
+
+        content: '.';
+        text-align: left;
+
+        opacity: 0;
+        color: transparent;
+        background: $dark-brown;
+    }
+
+    &Active {
+        font-weight: $bold-fw;
+
+        &:hover,
+        &:focus {
+            color: $dark-brown;
+
+            &:after {
+                @include animation(none);
+            }
+        }
+
+        &:after {
+            @include absolute-center('horizontal');
+
+            width: 75%;
+            height: 2px;
+
+            opacity: 1;
+        }
+    }
+}
+
+/* Keyframes */
+@keyframes fill {
+    0% {
+        width: 0%;
+        height: 1px;
+    }
+    50% {
+        width: 100%;
+        height: 1px;
+    }
+    100% {
+        width: 100%;
+        height: 100%;
+        background: $dark-brown;
+    }
+}
