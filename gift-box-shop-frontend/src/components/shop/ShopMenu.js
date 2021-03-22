@@ -1,4 +1,4 @@
-import styles from '../../styles/components/ShopMenu.module.scss'
+import styles from '../../../styles/components/shop/ShopMenu.module.scss'
 
 export default function ShopMenu({ stepsList, currentStep, setCurrentStep }) {
     function handleClick(option) {

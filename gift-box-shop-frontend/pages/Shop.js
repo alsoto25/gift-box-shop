@@ -1,8 +1,10 @@
 import React, { useState, useEffect } from 'react'
 import PageWrapper from '../src/components/global/PageWrapper'
-import ShopMenu from '../src/components/ShopMenu'
+import ShopMenu from '../src/components/shop/ShopMenu'
 
 export default function Shop() {
+    const [stepsData, setStepsData] = useState({})
+    const [userChoices, setUserChoices] = useState({})
     const [stepsList, setStepsList] = useState([])
     const [currentStep, setCurrentStep] = useState('1')
 
