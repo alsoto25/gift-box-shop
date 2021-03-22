@@ -1,23 +1,30 @@
-.containerShopMenu{
-    color: grey;
-    width: 10vw;
-    height: 30vh;
+@import '../utils.scss';
+
+.containerShopMenu {
+    max-width: 12vw;
+    position: relative;
     left: 10vw;
     top: 4vh;
-    position: relative;
-    font-size: 1.2rem;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    p{
-        width: 100%;
-        margin: 0.5vh 0px;
+    @include flexbox;
+    @include flex-direction(column);
+    @include justify-content(flex-start);
+    @include align-items(flex-start);
+    button {
+        background: transparent;
+        color: $inactive-gray;
+        border: none;
+        max-width: 100%;
+        margin: 0.6vh 0px;
+        font-size: 1.1rem;
         text-align: start;
+        //font-family: $serif-font-family;
+        &:hover {
+            cursor: pointer;
+        }
     }
 }
 
-.selectedOption{
-    color: white;
-    font-weight: bold;
+.selectedOption {
+    font-weight: $extra-bold-fw;
+    color: $white !important;
 }
