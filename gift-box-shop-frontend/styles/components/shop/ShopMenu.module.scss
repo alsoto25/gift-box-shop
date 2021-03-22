@@ -1,4 +1,4 @@
-@import '../utils.scss';
+@import '../../utils.scss';
 
 .containerShopMenu {
     max-width: 12vw;
@@ -9,6 +9,7 @@
     @include flex-direction(column);
     @include justify-content(flex-start);
     @include align-items(flex-start);
+
     button {
         background: transparent;
         color: $inactive-gray;
@@ -17,14 +18,16 @@
         margin: 0.6vh 0px;
         font-size: 1.1rem;
         text-align: start;
-        //font-family: $serif-font-family;
+        font-family: $serif-font-family;
+
         &:hover {
             cursor: pointer;
         }
-    }
-}
 
-.selectedOption {
-    font-weight: $extra-bold-fw;
-    color: $white !important;
+        &.selectedOption {
+            font-weight: $extra-bold-fw;
+            font-size: 1.3rem;
+            color: $white !important;
+        }
+    }
 }

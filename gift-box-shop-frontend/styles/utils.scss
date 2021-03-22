@@ -29,6 +29,9 @@ $white: #f8f8f8;
 
 // Media Queries Variables
 $breakpoints: (
+    'lt-small': (
+        max-width: 766px,
+    ),
     'small': (
         min-width: 767px,
     ),
