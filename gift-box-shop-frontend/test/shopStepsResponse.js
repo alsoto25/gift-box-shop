@@ -4,6 +4,7 @@ export const stepsResponse = {
         {
             id: 'box-type',
             title: 'Box Type',
+            isInitial: true,
             options: [
                 {
                     id: 'box-shape',
@@ -631,6 +632,7 @@ export const stepsResponse = {
         {
             id: 'extra',
             title: 'Extras',
+            isDefault: true,
             canAddMore: true,
             maxAmount: 3,
             options: [
@@ -698,6 +700,12 @@ export const stepsResponse = {
                     ],
                 },
             ],
+        },
+        {
+            id: 'review',
+            title: 'Review',
+            isDefault: true,
+            isReview: true,
         },
     ],
 }

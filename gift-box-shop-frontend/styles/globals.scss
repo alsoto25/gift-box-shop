@@ -97,7 +97,7 @@ nav {
 }
 
 nav {
-    max-width: 1600px;
+    max-width: 1200px;
     padding: 20px 30px;
 }
 
@@ -112,11 +112,26 @@ a {
 
 .root {
     height: 100%;
+
     @include flexbox;
     @include flex-direction(column);
 }
 
 main {
+    width: 100%;
     @include flex-grow(1);
+
     background-color: $dark-gray;
+}
+
+.main-content {
+    width: 100%;
+    max-width: 1600px;
+    display: block;
+    padding: 20px 7.5vw;
+    margin: 0 auto;
+
+    @include respond-to('small') {
+        padding: 20px 5vw;
+    }
 }

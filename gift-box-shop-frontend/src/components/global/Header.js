@@ -12,7 +12,7 @@ export default function Header() {
                 <Link href="/" passHref>
                     <a className={styles.logo}>
                         Repasa
-                        <span className={styles.logoSecondary}>giftbox</span>
+                        <span className={styles['logo-secondary']}>giftbox</span>
                     </a>
                 </Link>
                 <Menu styles={styles} />

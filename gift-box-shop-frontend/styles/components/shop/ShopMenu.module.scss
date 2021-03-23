@@ -1,10 +1,7 @@
 @import '../../utils.scss';
 
-.containerShopMenu {
-    max-width: 12vw;
+.container-shop-menu {
     position: relative;
-    left: 10vw;
-    top: 4vh;
     @include flexbox;
     @include flex-direction(column);
     @include justify-content(flex-start);
@@ -24,10 +21,11 @@
             cursor: pointer;
         }
 
-        &.selectedOption {
+        &.selected-option {
             font-weight: $extra-bold-fw;
-            font-size: 1.3rem;
+            font-size: 1.2rem;
             color: $white !important;
+            pointer-events: none;
         }
     }
 }

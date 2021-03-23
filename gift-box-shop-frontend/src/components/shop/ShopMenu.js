@@ -6,16 +6,16 @@ export default function ShopMenu({ stepsList, currentStep, setCurrentStep }) {
     }
 
     return (
-        <div className={styles.containerShopMenu}>
-            {stepsList.map((step) => (
+        <div className={styles['container-shop-menu']}>
+            {stepsList.map((step, index) => (
                 <button
-                    className={step.id === currentStep ? styles.selectedOption : ''}
+                    className={step.id === currentStep ? styles['selected-option'] : ''}
                     key={step.id}
                     onClick={() => {
                         handleClick(step.id)
                     }}
                 >
-                    {step.id}. {step.title}
+                    {index + 1}. {step.title}
                 </button>
             ))}
         </div>

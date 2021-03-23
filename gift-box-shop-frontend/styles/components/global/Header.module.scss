@@ -16,7 +16,7 @@
     color: $dark-brown;
 }
 
-.logoSecondary {
+.logo-secondary {
     line-height: 24px;
     letter-spacing: 3px;
     font-size: 20px;
@@ -92,7 +92,7 @@
     }
 }
 
-.linksContainer {
+.links-container {
     @include respond-to('lt-small') {
         position: fixed;
         top: 0;
