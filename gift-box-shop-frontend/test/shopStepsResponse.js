@@ -4,6 +4,7 @@ export const stepsResponse = {
         {
             id: 'box-type',
             title: 'Box Type',
+            isInitial: true,
             options: [
                 {
                     id: 'box-shape',
@@ -94,8 +95,6 @@ export const stepsResponse = {
                                         },
                                         {
                                             id: 'extras',
-                                            amount: 3,
-                                            optional: true,
                                         },
                                     ],
                                 },
@@ -122,8 +121,6 @@ export const stepsResponse = {
                                         },
                                         {
                                             id: 'extras',
-                                            amount: 3,
-                                            optional: true,
                                         },
                                     ],
                                 },
@@ -142,8 +139,6 @@ export const stepsResponse = {
                                         },
                                         {
                                             id: 'extras',
-                                            amount: 3,
-                                            optional: true,
                                         },
                                     ],
                                 },
@@ -166,8 +161,6 @@ export const stepsResponse = {
                                         },
                                         {
                                             id: 'extras',
-                                            amount: 3,
-                                            optional: true,
                                         },
                                     ],
                                 },
@@ -194,8 +187,6 @@ export const stepsResponse = {
                                         },
                                         {
                                             id: 'extras',
-                                            amount: 3,
-                                            optional: true,
                                         },
                                     ],
                                 },
@@ -214,8 +205,6 @@ export const stepsResponse = {
                                         },
                                         {
                                             id: 'extras',
-                                            amount: 3,
-                                            optional: true,
                                         },
                                     ],
                                 },
@@ -238,8 +227,6 @@ export const stepsResponse = {
                                         },
                                         {
                                             id: 'extras',
-                                            amount: 3,
-                                            optional: true,
                                         },
                                     ],
                                 },
@@ -641,6 +628,84 @@ export const stepsResponse = {
                     ],
                 },
             ],
+        },
+        {
+            id: 'extra',
+            title: 'Extras',
+            isDefault: true,
+            canAddMore: true,
+            maxAmount: 3,
+            options: [
+                {
+                    id: 'extra',
+                    title: 'Extra',
+                    dropdowns: [
+                        {
+                            name: 'Extras',
+                            options: [
+                                {
+                                    id: 'roses',
+                                    price: 5,
+                                    title: 'A single rose inside the box',
+                                    image: {
+                                        url: '',
+                                        alt: 'A single rose inside the box',
+                                    },
+                                    suboptions: {
+                                        name: "Choose the roses's color",
+                                        type: 'picker',
+                                        options: [
+                                            {
+                                                name: 'Red',
+                                                default: true,
+                                                hex: '#F00',
+                                            },
+                                            {
+                                                name: 'White',
+                                                hex: '#FFF',
+                                            },
+                                            {
+                                                name: 'Black',
+                                                hex: '#000',
+                                            },
+                                            {
+                                                name: 'Pink',
+                                                hex: '#F99',
+                                            },
+                                        ],
+                                    },
+                                },
+                                {
+                                    id: 'custom-letter',
+                                    price: 5,
+                                    title: 'A Letter you designed',
+                                    image: {
+                                        url: '',
+                                        alt: 'A Letter you designed',
+                                    },
+                                    fileUploader: true,
+                                },
+                                {
+                                    id: 'photo',
+                                    price: 10,
+                                    title: 'A photo you want printed',
+                                    image: {
+                                        url: '',
+                                        alt: 'A photo you want printed',
+                                    },
+                                    fileUploader: true,
+                                },
+                            ],
+                        },
+                    ],
+                },
+            ],
+        },
+        {
+            id: 'review',
+            title: 'Review',
+            isDefault: true,
+            isReview: true,
         },
     ],
 }

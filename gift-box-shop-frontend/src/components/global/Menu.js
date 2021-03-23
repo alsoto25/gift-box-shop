@@ -11,15 +11,15 @@ const menuItems = [
     },
     {
         text: 'Shop',
-        url: '/shop',
+        url: '/Shop',
     },
     {
         text: 'Contact',
-        url: '/contact',
+        url: '/Contact',
     },
     {
         text: 'About',
-        url: '/about',
+        url: '/About',
     },
 ]
 
@@ -44,7 +44,9 @@ const MenuElements = ({ open }) => {
 
     return (
         <div
-            className={`${styles.linksContainer}${open ? ` ${styles['linksContainer-open']}` : ''}`}
+            className={`${styles['links-container']}${
+                open ? ` ${styles['links-container-open']}` : ''
+            }`}
         >
             {menuItems.map((menuItem) => (
                 <Link key={menuItem.text} href={menuItem.url} passHref>
