@@ -11,15 +11,15 @@ const menuItems = [
     },
     {
         text: 'Shop',
-        url: '/shop',
+        url: '/Shop',
     },
     {
         text: 'Contact',
-        url: '/contact',
+        url: '/Contact',
     },
     {
         text: 'About',
-        url: '/about',
+        url: '/About',
     },
 ]
 

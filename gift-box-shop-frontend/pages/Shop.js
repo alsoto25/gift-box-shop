@@ -2,22 +2,31 @@ import React, { useState, useEffect } from 'react'
 import PageWrapper from '../src/components/global/PageWrapper'
 import ShopMenu from '../src/components/shop/ShopMenu'
 
+// Testing imports
+import { stepsResponse } from '../test/shopStepsResponse'
+
 export default function Shop() {
     const [stepsData, setStepsData] = useState({})
     const [userChoices, setUserChoices] = useState({})
     const [stepsList, setStepsList] = useState([])
-    const [currentStep, setCurrentStep] = useState('1')
+    const [currentStep, setCurrentStep] = useState(0)
 
     useEffect(() => {
         //Fetch/Axios Request API
-        setStepsList([
-            { id: '1', title: 'Box Type' },
-            { id: '2', title: 'Pastry' },
-            { id: '3', title: 'Skin Products' },
-            { id: '4', title: 'Extras' },
-            { id: '5', title: 'Review' },
-        ])
+        setTimeout(function () {
+            setStepsData(stepsResponse)
+        }, 300)
     }, [])
+
+    useEffect(() => {
+        stepsData.steps &&
+            setStepsList(
+                stepsData.steps.map((step) => ({
+                    id: step.id,
+                    step: step.title,
+                })),
+            )
+    }, [stepsData])
 
     return (
         <PageWrapper>
