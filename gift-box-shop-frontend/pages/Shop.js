@@ -1,12 +1,13 @@
 import React, { useState, useEffect } from 'react'
+import styles from '../styles/pages/Shop.module.scss'
+
 import PageWrapper from '../src/components/global/PageWrapper'
 import ShopMenu from '../src/components/shop/ShopMenu'
-import styles from '../styles/pages/Shop.module.scss'
-import MainComponent from '../src/components/shop/MainComponent'
+import DynamicStep from '../src/components/shop/DynamicStep'
+import Review from '../src/components/shop/Review'
 
 // Testing imports
 import { stepsResponse } from '../test/shopStepsResponse'
-import { loadComponents } from 'next/dist/next-server/server/load-components'
 
 export default function Shop() {
     const [currentStep, setCurrentStep] = useState('')
@@ -19,7 +20,7 @@ export default function Shop() {
     useEffect(() => {
         //Fetch/Axios Request API
         setTimeout(function () {
-            setStepsData(stepsResponse);
+            setStepsData(stepsResponse)
         }, 300)
     }, [])
 
@@ -45,12 +46,6 @@ export default function Shop() {
         }
     }, [stepsData])
 
-    const currentMainComponent=(step)=>{
-        if (currentStep===step.id){
-            return <MainComponent step={step} setCurrentStepData={setCurrentStepData} key={step.id}/>
-        }
-    };
-
     return (
         <PageWrapper>
             {!loading && (
@@ -63,13 +58,24 @@ export default function Shop() {
                         />
                     </div>
                     <div className={styles['right-column']}>
-                        {stepsData?
-                            stepsData.steps.map((step)=>(
-                                //Load component by currentStep
-                                currentMainComponent(step)
-                            ))
-                            :"Hi Stranger! we do not have data!"
-                        }
+                        {stepsData
+                            ? stepsData.steps.map((step) =>
+                                  step.isReview ? (
+                                      <Review
+                                          isActive={currentStep === step.id}
+                                          userChoices={userChoices}
+                                          key={step.id}
+                                      />
+                                  ) : (
+                                      <DynamicStep
+                                          step={step}
+                                          isActive={currentStep === step.id}
+                                          setCurrentStepData={setCurrentStepData}
+                                          key={step.id}
+                                      />
+                                  ),
+                              )
+                            : 'Hi Stranger! we do not have data!'}
                     </div>
                 </div>
             )}
