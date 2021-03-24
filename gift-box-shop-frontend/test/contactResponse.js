@@ -1,0 +1,5 @@
+export const contactResponse = {
+    title : "Have you a special request?",
+    info: "Lorem ip amet, l,excepturi unde?elit. nde? Vel,excepturi unde? Lorem ipsum dolor sit amet, consectetur adipisici ipisicing elit. Vel, excepturi unde? Lorem ipsum dolor sit amet, consectetur adipisici ipisicing elit. Vel, excepturi unde? Lorem ipsum dolor sit amet, consectetur adipisici ipisicing elit. Vel, excepturi unde? Lorem ipsum dolor sit amet, consectetur adipisici ipisicing elit. Vel, excepturi unde? Lorem ipsum dolor sit amet, consectetur adipisicing elit. Vel, excepturi unde?, Lorem ipsum dolor sit amet, consectetur adipisicing elit. Vel, excepturi unde? Lorem ipsum dolor sit amet, consectetur adipisicing elit. Vel, excepturi unde?, Lorem ipsum dolor sit amet, consectetur adipisicing elit. Vel, excepturi unde?" ,
+    image: "https://estaticos.miarevista.es/uploads/images/trick/577a8c9533ead0cf0946b2ff/reposteriaainterior.jpg"
+}
