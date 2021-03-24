@@ -2,7 +2,7 @@ export const stepsResponse = {
     basePrice: 15,
     steps: [
         {
-            id: 'box-type',
+            id: 'box-type-step',
             title: 'Box Type',
             isInitial: true,
             options: [
@@ -14,13 +14,21 @@ export const stepsResponse = {
                     descriptionPosition: 'bottom',
                     dropdowns: [
                         {
+                            id: 'box-shape-dropdown',
                             name: 'Box Shape',
                             options: [
+                                {
+                                    id: 'default',
+                                    disabled: true,
+                                    selected: true,
+                                    title: 'Select a Box Shape & Size',
+                                },
                                 {
                                     id: 'rb4030',
                                     title: 'Rectangle Box (40cm x 30cm)',
                                     image: {
-                                        url: '',
+                                        url:
+                                            'https://ohnatural.co.nz/wp-content/uploads/2019/12/gift-packaging-2.jpg',
                                         alt: '40cm by 30cm Rectangle Box',
                                     },
                                     price: 5,
@@ -29,7 +37,8 @@ export const stepsResponse = {
                                     id: 'rb2015',
                                     title: 'Rectangle Box (20cm x 15cm)',
                                     image: {
-                                        url: '',
+                                        url:
+                                            'https://ohnatural.co.nz/wp-content/uploads/2019/12/gift-packaging-2.jpg',
                                         alt: '20cm by 15cm Rectangle Box',
                                     },
                                     price: 0,
@@ -38,7 +47,8 @@ export const stepsResponse = {
                                     id: 'sb30',
                                     title: 'Square Box (30cm x 30cm)',
                                     image: {
-                                        url: '',
+                                        url:
+                                            'https://ohnatural.co.nz/wp-content/uploads/2019/12/gift-packaging-2.jpg',
                                         alt: '30cm by 30cm Square Box',
                                     },
                                     price: 2.5,
@@ -47,7 +57,8 @@ export const stepsResponse = {
                                     id: 'cb15',
                                     title: 'Circle Box (15cm radius)',
                                     image: {
-                                        url: '',
+                                        url:
+                                            'https://ohnatural.co.nz/wp-content/uploads/2019/12/gift-packaging-2.jpg',
                                         alt: '15cm radius Circle Box',
                                     },
                                     price: 2.5,
@@ -55,178 +66,169 @@ export const stepsResponse = {
                             ],
                         },
                         {
+                            id: 'box-contents-dropdown',
                             name: 'Box Contents',
+                            dependencyId: 'box-shape-dropdown',
                             options: [
+                                {
+                                    id: 'default',
+                                    disabled: true,
+                                    selected: true,
+                                    title: 'Select the Box Contents',
+                                },
                                 {
                                     id: '6p',
                                     title: '6 Pastries',
-                                    boxCompatible: ['rb4030'],
+                                    dependencies: ['rb4030'],
                                     image: {
-                                        url: '',
+                                        url:
+                                            'https://ohnatural.co.nz/wp-content/uploads/2019/12/gift-packaging-2.jpg',
                                         alt: '6 Pastries',
                                     },
                                     steps: [
                                         {
-                                            id: 'pastries',
+                                            id: 'pastries-step',
                                             amount: 6,
-                                        },
-                                        {
-                                            id: 'extras',
-                                            amount: 3,
                                         },
                                     ],
                                 },
                                 {
                                     id: '4p1bl',
                                     title: '4 Pastries & 1 liquor bottle',
-                                    boxCompatible: ['rb4030'],
+                                    dependencies: ['rb4030'],
                                     image: {
-                                        url: '',
+                                        url:
+                                            'https://ohnatural.co.nz/wp-content/uploads/2019/12/gift-packaging-2.jpg',
                                         alt: '4 Pastries & 1 liquor bottle',
                                     },
                                     steps: [
                                         {
-                                            id: 'pastries',
+                                            id: 'pastries-step',
                                             amount: 4,
                                         },
                                         {
-                                            id: 'liquor',
+                                            id: 'liquor-step',
                                             amount: 1,
-                                        },
-                                        {
-                                            id: 'extras',
                                         },
                                     ],
                                 },
                                 {
                                     id: '3p1s1bl',
                                     title: '3 Pastries, 1 Homemade soap & 1 Liquor bottle',
-                                    boxCompatible: ['rb4030'],
+                                    dependencies: ['rb4030'],
                                     image: {
-                                        url: '',
+                                        url:
+                                            'https://ohnatural.co.nz/wp-content/uploads/2019/12/gift-packaging-2.jpg',
                                         alt: '3 Pastries, 1 Homemade soap & 1 Liquor bottle',
                                     },
                                     steps: [
                                         {
-                                            id: 'pastries',
+                                            id: 'pastries-step',
                                             amount: 3,
                                         },
                                         {
-                                            id: 'soap',
+                                            id: 'soap-step',
                                             amount: 1,
                                         },
                                         {
-                                            id: 'liquor',
+                                            id: 'liquor-step',
                                             amount: 1,
-                                        },
-                                        {
-                                            id: 'extras',
                                         },
                                     ],
                                 },
                                 {
                                     id: '5p',
                                     title: '5 Pastries',
-                                    boxCompatible: ['sb30'],
+                                    dependencies: ['sb30'],
                                     image: {
-                                        url: '',
+                                        url:
+                                            'https://ohnatural.co.nz/wp-content/uploads/2019/12/gift-packaging-2.jpg',
                                         alt: '5 Pastries',
                                     },
                                     steps: [
                                         {
-                                            id: 'pastries',
+                                            id: 'pastries-step',
                                             amount: 5,
-                                        },
-                                        {
-                                            id: 'extras',
                                         },
                                     ],
                                 },
                                 {
                                     id: '3p1bl',
                                     title: '3 Pastries & 1 liquor bottle',
-                                    boxCompatible: ['sb30'],
+                                    dependencies: ['sb30'],
                                     image: {
-                                        url: '',
+                                        url:
+                                            'https://ohnatural.co.nz/wp-content/uploads/2019/12/gift-packaging-2.jpg',
                                         alt: '3 Pastries & 1 liquor bottle',
                                     },
                                     steps: [
                                         {
-                                            id: 'pastries',
+                                            id: 'pastries-step',
                                             amount: 3,
                                         },
                                         {
-                                            id: 'liquor',
+                                            id: 'liquor-step',
                                             amount: 1,
-                                        },
-                                        {
-                                            id: 'extras',
                                         },
                                     ],
                                 },
                                 {
-                                    id: '3p1s1bl',
+                                    id: '2p1s1bl',
                                     title: '2 Pastries, 1 Skin Product & 1 Liquor bottle',
-                                    boxCompatible: ['sb30'],
+                                    dependencies: ['sb30'],
                                     image: {
-                                        url: '',
+                                        url:
+                                            'https://ohnatural.co.nz/wp-content/uploads/2019/12/gift-packaging-2.jpg',
                                         alt: '2 Pastries, 1 Skin Product & 1 Liquor bottle',
                                     },
                                     steps: [
                                         {
-                                            id: 'pastries',
+                                            id: 'pastries-step',
                                             amount: 2,
                                         },
                                         {
-                                            id: 'skin',
+                                            id: 'skin-step',
                                             amount: 1,
                                         },
                                         {
-                                            id: 'liquor',
+                                            id: 'liquor-step',
                                             amount: 1,
-                                        },
-                                        {
-                                            id: 'extras',
                                         },
                                     ],
                                 },
                                 {
                                     id: '4p',
                                     title: '4 Pastries',
-                                    boxCompatible: ['rb2015', 'cb15'],
+                                    dependencies: ['rb2015', 'cb15'],
                                     image: {
-                                        url: '',
+                                        url:
+                                            'https://ohnatural.co.nz/wp-content/uploads/2019/12/gift-packaging-2.jpg',
                                         alt: '4 Pastries',
                                     },
                                     steps: [
                                         {
-                                            id: 'pastries',
+                                            id: 'pastries-step',
                                             amount: 4,
-                                        },
-                                        {
-                                            id: 'extras',
                                         },
                                     ],
                                 },
                                 {
                                     id: '2p1bl',
                                     title: '2 Pastries & 1 liquor bottle',
-                                    boxCompatible: ['rb2015', 'cb15'],
+                                    dependencies: ['rb2015', 'cb15'],
                                     image: {
-                                        url: '',
+                                        url:
+                                            'https://ohnatural.co.nz/wp-content/uploads/2019/12/gift-packaging-2.jpg',
                                         alt: '2 Pastries & 1 liquor bottle',
                                     },
                                     steps: [
                                         {
-                                            id: 'pastries',
+                                            id: 'pastries-step',
                                             amount: 2,
                                         },
                                         {
-                                            id: 'liquor',
+                                            id: 'liquor-step',
                                             amount: 1,
-                                        },
-                                        {
-                                            id: 'extras',
                                         },
                                     ],
                                 },
@@ -243,16 +245,25 @@ export const stepsResponse = {
                     dropdowns: [
                         {
                             name: 'Box Design',
+                            id: 'box-design-dropdown',
+                            dependencyId: 'box-shape-dropdown',
                             options: [
+                                {
+                                    id: 'default',
+                                    disabled: true,
+                                    selected: true,
+                                    title: 'Select a Box Design',
+                                },
                                 {
                                     id: 'colored',
                                     title: 'Color',
                                     image: {
-                                        url: '',
+                                        url:
+                                            'https://ohnatural.co.nz/wp-content/uploads/2019/12/gift-packaging-2.jpg',
                                         alt: 'Colored design gift box',
                                     },
                                     price: 0,
-                                    boxCompatible: ['rb4030', 'rb2015', 'cb15'],
+                                    dependencies: ['rb4030', 'rb2015', 'cb15'],
                                     suboptions: {
                                         name: "Choose the box's color",
                                         type: 'picker',
@@ -261,27 +272,27 @@ export const stepsResponse = {
                                                 name: 'White',
                                                 default: true,
                                                 hex: '#FFF',
-                                                boxCompatible: ['rb4030', 'rb2015', 'cb15'],
+                                                dependencies: ['rb4030', 'rb2015', 'cb15'],
                                             },
                                             {
                                                 name: 'Black',
                                                 hex: '#000',
-                                                boxCompatible: ['rb4030', 'rb2015', 'cb15'],
+                                                dependencies: ['rb4030', 'rb2015', 'cb15'],
                                             },
                                             {
                                                 name: 'Red',
                                                 hex: '#F00',
-                                                boxCompatible: ['rb4030', 'rb2015'],
+                                                dependencies: ['rb4030', 'rb2015'],
                                             },
                                             {
                                                 name: 'Pink',
                                                 hex: '#F77',
-                                                boxCompatible: ['cb15'],
+                                                dependencies: ['cb15'],
                                             },
                                             {
                                                 name: 'Sky Blue',
                                                 hex: '#99F',
-                                                boxCompatible: ['cb15'],
+                                                dependencies: ['cb15'],
                                             },
                                         ],
                                     },
@@ -290,11 +301,12 @@ export const stepsResponse = {
                                     id: 'wooden',
                                     title: 'Wooden',
                                     image: {
-                                        url: '',
+                                        url:
+                                            'https://ohnatural.co.nz/wp-content/uploads/2019/12/gift-packaging-2.jpg',
                                         alt: 'Wooden design gift box',
                                     },
                                     price: 5,
-                                    boxCompatible: ['sb30'],
+                                    dependencies: ['sb30'],
                                     suboptions: {
                                         name: "Choose the box's color",
                                         type: 'picker',
@@ -303,7 +315,7 @@ export const stepsResponse = {
                                                 name: 'Wooden',
                                                 default: true,
                                                 hex: '#A47449',
-                                                boxCompatible: ['sb30'],
+                                                dependencies: ['sb30'],
                                             },
                                         ],
                                     },
@@ -312,11 +324,12 @@ export const stepsResponse = {
                                     id: 'colored-with-design-lid',
                                     title: 'Colored box with custom design on lid',
                                     image: {
-                                        url: '',
+                                        url:
+                                            'https://ohnatural.co.nz/wp-content/uploads/2019/12/gift-packaging-2.jpg',
                                         alt: 'Colored box with custom design on lid',
                                     },
                                     price: '10',
-                                    boxCompatible: ['rb4030', 'rb2015'],
+                                    dependencies: ['rb4030', 'rb2015'],
                                     fileUploader: true,
                                     suboptions: {
                                         name: "Choose the box's color",
@@ -326,17 +339,17 @@ export const stepsResponse = {
                                                 name: 'White',
                                                 default: true,
                                                 hex: '#FFF',
-                                                boxCompatible: ['rb4030', 'rb2015'],
+                                                dependencies: ['rb4030', 'rb2015'],
                                             },
                                             {
                                                 name: 'Black',
                                                 hex: '#000',
-                                                boxCompatible: ['rb4030', 'rb2015'],
+                                                dependencies: ['rb4030', 'rb2015'],
                                             },
                                             {
                                                 name: 'Red',
                                                 hex: '#F00',
-                                                boxCompatible: ['rb4030', 'rb2015'],
+                                                dependencies: ['rb4030', 'rb2015'],
                                             },
                                         ],
                                     },
@@ -348,7 +361,7 @@ export const stepsResponse = {
             ],
         },
         {
-            id: 'pastries',
+            id: 'pastries-step',
             title: 'Pastries',
             options: [
                 {
@@ -360,12 +373,20 @@ export const stepsResponse = {
                     dropdowns: [
                         {
                             name: 'Pastry Type',
+                            id: 'pastry-type-dropdown',
                             options: [
+                                {
+                                    id: 'default',
+                                    disabled: true,
+                                    selected: true,
+                                    title: 'Select a Pastry Type',
+                                },
                                 {
                                     id: 'regular',
                                     title: 'Regular (might have glutten)',
                                     image: {
-                                        url: '',
+                                        url:
+                                            'https://ohnatural.co.nz/wp-content/uploads/2019/12/gift-packaging-2.jpg',
                                         alt:
                                             'Regular type pastry (might have gluten and regular sugar)',
                                     },
@@ -374,7 +395,8 @@ export const stepsResponse = {
                                     id: 'diet',
                                     title: 'Diet (sweetened with sugar substitute)',
                                     image: {
-                                        url: '',
+                                        url:
+                                            'https://ohnatural.co.nz/wp-content/uploads/2019/12/gift-packaging-2.jpg',
                                         alt: 'Diet (sweetened with sugar substitute)',
                                     },
                                 },
@@ -382,7 +404,8 @@ export const stepsResponse = {
                                     id: 'gluten-free',
                                     title: 'Gluten Free',
                                     image: {
-                                        url: '',
+                                        url:
+                                            'https://ohnatural.co.nz/wp-content/uploads/2019/12/gift-packaging-2.jpg',
                                         alt: 'Gluten Free',
                                     },
                                 },
@@ -390,14 +413,23 @@ export const stepsResponse = {
                         },
                         {
                             name: 'Pastry',
+                            id: 'pastry-dropdown',
+                            dependencyId: 'pastry-type-dropdown',
                             options: [
+                                {
+                                    id: 'default',
+                                    disabled: true,
+                                    selected: true,
+                                    title: 'Select a Pastry',
+                                },
                                 {
                                     id: 'croissant',
                                     price: 7.5,
                                     title: '2 Croissants',
-                                    pastryType: ['regular'],
+                                    dependencies: ['regular'],
                                     image: {
-                                        url: '',
+                                        url:
+                                            'https://ohnatural.co.nz/wp-content/uploads/2019/12/gift-packaging-2.jpg',
                                         alt: '2 Croissants',
                                     },
                                 },
@@ -405,9 +437,10 @@ export const stepsResponse = {
                                     id: 'brigadeiro',
                                     price: 10,
                                     title: '6 Brigadeiros',
-                                    pastryType: ['regular'],
+                                    dependencies: ['regular'],
                                     image: {
-                                        url: '',
+                                        url:
+                                            'https://ohnatural.co.nz/wp-content/uploads/2019/12/gift-packaging-2.jpg',
                                         alt: '6 Brigadeiros',
                                     },
                                 },
@@ -415,9 +448,10 @@ export const stepsResponse = {
                                     id: 'chocolate-chip-cookies',
                                     price: 5,
                                     title: '4 Chocolate Chip Cookies',
-                                    pastryType: ['regular', 'diet', 'gluten-free'],
+                                    dependencies: ['regular', 'diet', 'gluten-free'],
                                     image: {
-                                        url: '',
+                                        url:
+                                            'https://ohnatural.co.nz/wp-content/uploads/2019/12/gift-packaging-2.jpg',
                                         alt: '4 Chocolate Chip Cookies',
                                     },
                                 },
@@ -425,9 +459,10 @@ export const stepsResponse = {
                                     id: 'brownies',
                                     price: 5,
                                     title: '2 Brownies',
-                                    pastryType: ['regular', 'diet'],
+                                    dependencies: ['regular', 'diet'],
                                     image: {
-                                        url: '',
+                                        url:
+                                            'https://ohnatural.co.nz/wp-content/uploads/2019/12/gift-packaging-2.jpg',
                                         alt: '2 Brownies',
                                     },
                                 },
@@ -435,9 +470,10 @@ export const stepsResponse = {
                                     id: 'quiche',
                                     price: 7.5,
                                     title: '2 Quiches',
-                                    pastryType: ['regular', 'gluten-free'],
+                                    dependencies: ['regular', 'gluten-free'],
                                     image: {
-                                        url: '',
+                                        url:
+                                            'https://ohnatural.co.nz/wp-content/uploads/2019/12/gift-packaging-2.jpg',
                                         alt: '2 Quiches',
                                     },
                                 },
@@ -445,9 +481,10 @@ export const stepsResponse = {
                                     id: 'cornbread',
                                     price: 5,
                                     title: '1 Cornbread Slice',
-                                    pastryType: ['regular', 'diet'],
+                                    dependencies: ['regular', 'diet'],
                                     image: {
-                                        url: '',
+                                        url:
+                                            'https://ohnatural.co.nz/wp-content/uploads/2019/12/gift-packaging-2.jpg',
                                         alt: '1 Cornbread Slice',
                                     },
                                 },
@@ -455,9 +492,10 @@ export const stepsResponse = {
                                     id: 'chocolate-strawberries',
                                     price: 2.5,
                                     title: '4 Chocolate Covered Strawberries',
-                                    pastryType: ['regular', 'diet', 'gluten-free'],
+                                    dependencies: ['regular', 'diet', 'gluten-free'],
                                     image: {
-                                        url: '',
+                                        url:
+                                            'https://ohnatural.co.nz/wp-content/uploads/2019/12/gift-packaging-2.jpg',
                                         alt: '4 Chocolate Covered Strawberries',
                                     },
                                 },
@@ -465,9 +503,10 @@ export const stepsResponse = {
                                     id: 'cheesecake',
                                     price: 7.5,
                                     title: '1 Small Cheesecake',
-                                    pastryType: ['diet', 'gluten-free'],
+                                    dependencies: ['diet', 'gluten-free'],
                                     image: {
-                                        url: '',
+                                        url:
+                                            'https://ohnatural.co.nz/wp-content/uploads/2019/12/gift-packaging-2.jpg',
                                         alt: '1 Small Cheesecake',
                                     },
                                 },
@@ -475,9 +514,10 @@ export const stepsResponse = {
                                     id: 'cupcakes',
                                     price: 7.5,
                                     title: '2 Small Cupcakes with frosting',
-                                    pastryType: ['regular', 'diet'],
+                                    dependencies: ['regular', 'diet'],
                                     image: {
-                                        url: '',
+                                        url:
+                                            'https://ohnatural.co.nz/wp-content/uploads/2019/12/gift-packaging-2.jpg',
                                         alt: '2 Small Cupcakes with frosting',
                                     },
                                 },
@@ -488,7 +528,7 @@ export const stepsResponse = {
             ],
         },
         {
-            id: 'liquor',
+            id: 'liquor-step',
             title: 'Liquor',
             options: [
                 {
@@ -500,13 +540,21 @@ export const stepsResponse = {
                     dropdowns: [
                         {
                             name: 'Liquor',
+                            id: 'liquor-dropdown',
                             options: [
+                                {
+                                    id: 'default',
+                                    disabled: true,
+                                    selected: true,
+                                    title: 'Select a Liquor Type',
+                                },
                                 {
                                     id: 'orange-liquor',
                                     price: 30,
                                     title: 'Artisan Orange Infused Liquor',
                                     image: {
-                                        url: '',
+                                        url:
+                                            'https://ohnatural.co.nz/wp-content/uploads/2019/12/gift-packaging-2.jpg',
                                         alt: 'Artisan Orange Infused Liquor',
                                     },
                                 },
@@ -515,7 +563,8 @@ export const stepsResponse = {
                                     price: 35,
                                     title: 'Artisan Coffee Infused Liquor',
                                     image: {
-                                        url: '',
+                                        url:
+                                            'https://ohnatural.co.nz/wp-content/uploads/2019/12/gift-packaging-2.jpg',
                                         alt: 'Artisan Coffee Infused Liquor',
                                     },
                                 },
@@ -523,9 +572,10 @@ export const stepsResponse = {
                                     id: 'mint-liquor',
                                     price: 30,
                                     title: 'Artisan Mint Infused Liquor',
-                                    pastryType: ['regular', 'diet', 'gluten-free'],
+                                    dependencies: ['regular', 'diet', 'gluten-free'],
                                     image: {
-                                        url: '',
+                                        url:
+                                            'https://ohnatural.co.nz/wp-content/uploads/2019/12/gift-packaging-2.jpg',
                                         alt: 'Artisan Mint Infused Liquor',
                                     },
                                 },
@@ -536,7 +586,7 @@ export const stepsResponse = {
             ],
         },
         {
-            id: 'soap',
+            id: 'soap-step',
             title: 'Homemade Soap',
             options: [
                 {
@@ -548,13 +598,21 @@ export const stepsResponse = {
                     dropdowns: [
                         {
                             name: 'Homemade Soap',
+                            id: 'soap-dropdown',
                             options: [
+                                {
+                                    id: 'default',
+                                    disabled: true,
+                                    selected: true,
+                                    title: 'Select a Homemade Soap',
+                                },
                                 {
                                     id: 'orange-soap',
                                     price: 15,
                                     title: 'Homemade Orange Infused Soap',
                                     image: {
-                                        url: '',
+                                        url:
+                                            'https://ohnatural.co.nz/wp-content/uploads/2019/12/gift-packaging-2.jpg',
                                         alt: 'Homemade Orange Infused Soap',
                                     },
                                 },
@@ -563,7 +621,8 @@ export const stepsResponse = {
                                     price: 20,
                                     title: 'Homemade Coffee Infused Soap',
                                     image: {
-                                        url: '',
+                                        url:
+                                            'https://ohnatural.co.nz/wp-content/uploads/2019/12/gift-packaging-2.jpg',
                                         alt: 'Homemade Coffee Infused Soap',
                                     },
                                 },
@@ -572,7 +631,8 @@ export const stepsResponse = {
                                     price: 15,
                                     title: 'Homemade Mint Infused Soap',
                                     image: {
-                                        url: '',
+                                        url:
+                                            'https://ohnatural.co.nz/wp-content/uploads/2019/12/gift-packaging-2.jpg',
                                         alt: 'Homemade Mint Infused Soap',
                                     },
                                 },
@@ -583,7 +643,7 @@ export const stepsResponse = {
             ],
         },
         {
-            id: 'skin',
+            id: 'skin-step',
             title: 'Skin Products',
             options: [
                 {
@@ -595,13 +655,21 @@ export const stepsResponse = {
                     dropdowns: [
                         {
                             name: 'Skin Products',
+                            id: 'skin-dropdown',
                             options: [
+                                {
+                                    id: 'default',
+                                    disabled: true,
+                                    selected: true,
+                                    title: 'Select a Skin Product',
+                                },
                                 {
                                     id: 'hand-lotion',
                                     price: 15,
                                     title: 'Moisturizing Hand Lotion',
                                     image: {
-                                        url: '',
+                                        url:
+                                            'https://ohnatural.co.nz/wp-content/uploads/2019/12/gift-packaging-2.jpg',
                                         alt: 'Moisturizing Hand Lotion',
                                     },
                                 },
@@ -610,7 +678,8 @@ export const stepsResponse = {
                                     price: 15,
                                     title: 'Relaxing Bubble Bath',
                                     image: {
-                                        url: '',
+                                        url:
+                                            'https://ohnatural.co.nz/wp-content/uploads/2019/12/gift-packaging-2.jpg',
                                         alt: 'Relaxing Bubble Bath',
                                     },
                                 },
@@ -619,7 +688,8 @@ export const stepsResponse = {
                                     price: 15,
                                     title: 'Face Cleansing Liquid Soap',
                                     image: {
-                                        url: '',
+                                        url:
+                                            'https://ohnatural.co.nz/wp-content/uploads/2019/12/gift-packaging-2.jpg',
                                         alt: 'Face Cleansing Liquid Soap',
                                     },
                                 },
@@ -630,7 +700,7 @@ export const stepsResponse = {
             ],
         },
         {
-            id: 'extra',
+            id: 'extra-step',
             title: 'Extras',
             isDefault: true,
             canAddMore: true,
@@ -642,13 +712,21 @@ export const stepsResponse = {
                     dropdowns: [
                         {
                             name: 'Extras',
+                            id: 'extra-dropdown',
                             options: [
+                                {
+                                    id: 'default',
+                                    disabled: true,
+                                    selected: true,
+                                    title: 'Select an Extra (optional)',
+                                },
                                 {
                                     id: 'roses',
                                     price: 5,
                                     title: 'A single rose inside the box',
                                     image: {
-                                        url: '',
+                                        url:
+                                            'https://ohnatural.co.nz/wp-content/uploads/2019/12/gift-packaging-2.jpg',
                                         alt: 'A single rose inside the box',
                                     },
                                     suboptions: {
@@ -680,7 +758,8 @@ export const stepsResponse = {
                                     price: 5,
                                     title: 'A Letter you designed',
                                     image: {
-                                        url: '',
+                                        url:
+                                            'https://ohnatural.co.nz/wp-content/uploads/2019/12/gift-packaging-2.jpg',
                                         alt: 'A Letter you designed',
                                     },
                                     fileUploader: true,
@@ -690,7 +769,8 @@ export const stepsResponse = {
                                     price: 10,
                                     title: 'A photo you want printed',
                                     image: {
-                                        url: '',
+                                        url:
+                                            'https://ohnatural.co.nz/wp-content/uploads/2019/12/gift-packaging-2.jpg',
                                         alt: 'A photo you want printed',
                                     },
                                     fileUploader: true,
@@ -702,7 +782,7 @@ export const stepsResponse = {
             ],
         },
         {
-            id: 'review',
+            id: 'review-step',
             title: 'Review',
             isDefault: true,
             isReview: true,
