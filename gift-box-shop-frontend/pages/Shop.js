@@ -62,6 +62,25 @@ export default function Shop() {
         }
     }, [stepsData.steps.length, userChoices.steps.length])
 
+    function validateStep(stepID) {
+        let dropdownsToCheck = []
+        stepsData.steps.map((step) => {
+            if (step.id === stepID) {
+                step.options.map((option) => {
+                    option.dropdowns.map((dropdown) => {
+                        dropdownsToCheck.push(dropdown.id)
+                        // dropdown.options.map((suboption) => {
+                        //     suboption['suboptions'] ? alert('si tiene subOption') : null
+                        // })
+                    })
+                })
+            }
+        })
+        let dropdowns = dropdownsToCheck.filter((dropdown) => userChoices[dropdown])
+        if (dropdowns.length === dropdownsToCheck.length) return true
+        return false
+    }
+
     return (
         <PageWrapper>
             {!loading && (
@@ -84,11 +103,16 @@ export default function Shop() {
                                       />
                                   ) : (
                                       <DynamicStep
+                                          key={step.id}
                                           step={step}
                                           isActive={currentStep === step.id}
                                           userChoices={userChoices}
                                           setUserChoices={setUserChoices}
-                                          key={step.id}
+                                          stepsList={stepsList}
+                                          currentStep={currentStep}
+                                          setCurrentStep={setCurrentStep}
+                                          setStepsList={setStepsList}
+                                          validateStep={validateStep}
                                       />
                                   ),
                               )

@@ -125,12 +125,18 @@
 }
 
 .choice-next-button {
-    display: none;
+    background: $white;
+    color: $aqua;
+    position: relative;
+    float: right;
+    bottom: 3vh;
     padding: 5px 15px;
-
     border-radius: 20px;
-
+    border: 2px solid $aqua;
     font: $bold-fw 1rem / 1.2rem $serif-font-family;
+    &:hover {
+        cursor: pointer;
+    }
 }
 
 .suboptions {
