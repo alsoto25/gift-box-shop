@@ -34,7 +34,14 @@ function DynamicDropdown({ dropdown, userChoices, handleChange }) {
     )
 }
 
-function ChoicesSection({ step, isActive, userChoices, currentOption, setCurrentOption }) {
+function ChoicesSection({
+    step,
+    isActive,
+    userChoices,
+    currentOption,
+    setCurrentOption,
+    setHaveSuboption,
+}) {
     return (
         <div
             className={`${styles['choices-section']} ${
@@ -50,6 +57,7 @@ function ChoicesSection({ step, isActive, userChoices, currentOption, setCurrent
                         }`}
                         type="button"
                         onClick={function () {
+                            setHaveSuboption(false)
                             setCurrentOption(index)
                         }}
                     >
@@ -84,12 +92,22 @@ function ChoicesSection({ step, isActive, userChoices, currentOption, setCurrent
 export default function DynamicStep({ step, isActive, userChoices, setUserChoices }) {
     const [currentOption, setCurrentOption] = useState(0)
     const { title, dropdowns, description } = step.options[currentOption]
+    let [haveSuboption, setHaveSuboption] = useState(false)
+    let [suboptionData, setSuboptionData] = useState({})
 
     const handleChange = (e, dropdown) => {
+        setHaveSuboption(false)
         const steps =
             dropdown.id === 'box-contents-dropdown'
                 ? dropdown.options.find((opt) => opt.id === e.target.value).steps
                 : []
+
+        if (dropdown.id === 'box-design-dropdown') {
+            setSuboptionData(
+                dropdown.options.filter((opt) => opt.id === e.target.value)[0].suboptions,
+            )
+            suboptionData ? setHaveSuboption(true) : null
+        }
 
         setUserChoices({
             ...userChoices,
@@ -98,7 +116,6 @@ export default function DynamicStep({ step, isActive, userChoices, setUserChoice
         })
     }
 
-    //Rest of components of MainShop
     return (
         <>
             <div
@@ -122,6 +139,22 @@ export default function DynamicStep({ step, isActive, userChoices, setUserChoice
                                 }}
                             />
                         ))}
+                    {haveSuboption ? (
+                        <div className={styles['suboptions']}>
+                            <h2>{suboptionData.name}</h2>
+                            <div>
+                                {suboptionData.options.map((option) => (
+                                    <label for={option.name} style={{ background: option.hex }}>
+                                        <input
+                                            type="radio"
+                                            name={suboptionData.name}
+                                            id={option.name}
+                                        />
+                                    </label>
+                                ))}
+                            </div>
+                        </div>
+                    ) : null}
                     <p>{description}</p>
                 </div>
             </div>
@@ -131,6 +164,7 @@ export default function DynamicStep({ step, isActive, userChoices, setUserChoice
                 userChoices={userChoices}
                 currentOption={currentOption}
                 setCurrentOption={setCurrentOption}
+                setHaveSuboption={setHaveSuboption}
             />
         </>
     )

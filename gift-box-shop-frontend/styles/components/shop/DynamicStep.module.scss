@@ -44,6 +44,7 @@
         }
 
         p {
+            padding: 1em;
             text-overflow: ellipsis;
             text-align: start;
             font-size: 0.77em;
@@ -130,4 +131,35 @@
     border-radius: 20px;
 
     font: $bold-fw 1rem / 1.2rem $serif-font-family;
+}
+
+.suboptions {
+    width: 100% !important;
+    height: 30%;
+    @include flexbox;
+    @include flex-direction(column);
+    h2 {
+        margin-bottom: 0.5em;
+    }
+    div {
+        width: 100%;
+        @include flexbox;
+        @include flex-direction(row);
+        align-items: flex-start;
+        padding: 0px;
+    }
+    label {
+        display: inline-block;
+        margin-right: 1em;
+        border-radius: 10px;
+        width: 40px;
+        height: 42px;
+        border: 2px solid $black;
+    }
+    input {
+        display: block;
+        &[type='radio']:checked {
+            box-shadow: 0 0 0 2px orange;
+        }
+    }
 }
