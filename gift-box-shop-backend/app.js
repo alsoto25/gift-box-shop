@@ -3,7 +3,17 @@ var path = require('path');
 var cookieParser = require('cookie-parser');
 var logger = require('morgan');
 
-var exampleController = require('./routes/exampleController');
+//Firebase connection
+const admin = require('firebase-admin');
+var serviceAccount = require("./proyecto-gift-box-firebase-adminsdk-uf6kh-10842a08cc.json");
+admin.initializeApp({
+    credential: admin.credential.cert(serviceAccount),
+    databaseURL: 'https://proyecto-gift-box-default-rtdb.firebaseio.com/'
+});
+
+var aboutController = require('./routes/aboutController');
+var contactController = require('./routes/contactController');
+var shopStepsController = require('./routes/shopStepsController');
 
 var app = express();
 
@@ -20,7 +30,10 @@ app.use((req, res, next) => {
     next();
 });
 
-app.use('/example', exampleController);
+
+app.use('/about', aboutController);
+app.use('/contact', contactController);
+app.use('/shopSteps', shopStepsController);
 
 // error handler
 app.use(function (err, req, res, next) {
