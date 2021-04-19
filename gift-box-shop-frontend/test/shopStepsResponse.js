@@ -328,7 +328,7 @@ export const stepsResponse = {
                                             'https://ohnatural.co.nz/wp-content/uploads/2019/12/gift-packaging-2.jpg',
                                         alt: 'Colored box with custom design on lid',
                                     },
-                                    price: '10',
+                                    price: 10,
                                     dependencies: ['rb4030', 'rb2015'],
                                     fileUploader: true,
                                     suboptions: {
