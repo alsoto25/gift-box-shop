@@ -8,11 +8,9 @@ export default function Header() {
   return (
     <header>
       <nav className={styles.navbar}>
-        <Link href="/">
-          <a className={styles.logo}>
-            Repasa
-            <span className={styles["logo-secondary"]}>giftbox</span>
-          </a>
+        <Link to="/" className={styles.logo}>
+          Repasa
+          <span className={styles["logo-secondary"]}>giftbox</span>
         </Link>
         <Menu />
       </nav>

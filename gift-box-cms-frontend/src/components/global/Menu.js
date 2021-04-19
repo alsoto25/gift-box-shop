@@ -52,15 +52,14 @@ const MenuElements = ({ open }) => {
       }`}
     >
       {menuItems.map((menuItem) => (
-        <Link key={menuItem.text} to={menuItem.url}>
-          <a
-            className={`${styles.link} ${
-              router.pathname === menuItem.url ? styles["link-active"] : ""
-            }
-                `}
-          >
-            {menuItem.text}
-          </a>
+        <Link
+          key={menuItem.text}
+          to={menuItem.url}
+          className={`${styles.link} ${
+            router.pathname === menuItem.url ? styles["link-active"] : ""
+          }`}
+        >
+          {menuItem.text}
         </Link>
       ))}
     </div>
