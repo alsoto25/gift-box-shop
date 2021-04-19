@@ -47,7 +47,7 @@ function DynamicDropdown({ dropdown, userChoices, handleChange }) {
         </select>
     )
 }
-
+//Falta eliminar viejo suboption cuando elige otro !!!
 function DynamicSuboption({ suboptionData, setCurrentSuboption }) {
     const [currentFileName, setCurrentFileName] = useState('')
     const { suboptions } = suboptionData
@@ -114,9 +114,12 @@ function ChoicesSection({
     setStepsList,
     validateStep,
     currentSuboption,
+    tempSuboption,
+    setTempSuboption,
 }) {
     //Falta validar subOptions y dependencias
     function handleClick() {
+        console.clear()
         stepsList.map((step, index) => {
             if (step.id === currentStep) {
                 if (index + 1 <= stepsList.length - 1) {
@@ -126,13 +129,30 @@ function ChoicesSection({
                         setStepsList(newStepsList)
                         setCurrentStep(stepsList[index + 1].id)
                         window.scrollTo(0, 0)
-                        for (var key in currentSuboption) {
+
+                        console.log(userChoices)
+                        console.log(tempSuboption)
+
+                        if (tempSuboption !== {}) {
+                            for (var tempKey in tempSuboption) {
+                                let copy = { ...userChoices }
+                                console.log(copy)
+                                delete copy[tempKey]
+                                console.log(copy)
+                                setUserChoices(copy)
+                                break
+                            }
+                        }
+
+                        for (var currentKey in currentSuboption) {
                             setUserChoices({
                                 ...userChoices,
-                                [key]: currentSuboption[key],
+                                [currentKey]: currentSuboption[currentKey],
                             })
+                            setTempSuboption({ ...currentSuboption })
                             break
                         }
+                        console.log(userChoices)
                     } else {
                         Toast.fire({
                             icon: 'error',
@@ -170,7 +190,7 @@ function ChoicesSection({
                     >
                         <div className={styles['choice-button-title']}>{option.title}</div>
                         {option.dropdowns.map((dropdown) => {
-                            console.log(dropdown)
+                            //console.log(dropdown)
                             return (
                                 <div className={styles['choice-button-line']}>
                                     -{' '}
@@ -209,6 +229,7 @@ export default function DynamicStep({
 }) {
     const [currentOption, setCurrentOption] = useState(0)
     const [currentSuboption, setCurrentSuboption] = useState({})
+    const [tempSuboption, setTempSuboption] = useState({})
     const { title, dropdowns, description } = step.options[currentOption]
     let [haveSuboption, setHaveSuboption] = useState(false)
     let [suboptionData, setSuboptionData] = useState({})
@@ -277,6 +298,8 @@ export default function DynamicStep({
                 setHaveSuboption={setHaveSuboption}
                 currentSuboption={currentSuboption}
                 setCurrentOption={setCurrentOption}
+                tempSuboption={tempSuboption}
+                setTempSuboption={setTempSuboption}
             />
         </>
     )
