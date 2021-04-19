@@ -1,22 +1,19 @@
-import Link from 'next/link'
-import { useRouter } from 'next/router'
+import { Link } from "react-router-dom";
 
-import Menu from './Menu'
+import Menu from "./Menu";
 
-import styles from '../../../styles/components/global/Header.module.scss'
+import styles from "../../styles/components/global/Header.module.scss";
 
 export default function Header() {
-    return (
-        <header>
-            <nav className={styles.navbar}>
-                <Link href="/" passHref>
-                    <a className={styles.logo}>
-                        Repasa
-                        <span className={styles['logo-secondary']}>giftbox</span>
-                    </a>
-                </Link>
-                <Menu styles={styles} />
-            </nav>
-        </header>
-    )
+  return (
+    <header>
+      <nav className={styles.navbar}>
+        <Link to="/" className={styles.logo}>
+          Repasa
+          <span className={styles["logo-secondary"]}>giftbox</span>
+        </Link>
+        <Menu />
+      </nav>
+    </header>
+  );
 }
