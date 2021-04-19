@@ -2,9 +2,7 @@
 
 .container-main {
     position: relative;
-    top: 3vh;
-    max-width: 80vw;
-    height: 60vh;
+    width: 100%;
     padding: 1.5rem 2.5rem;
     border-radius: 20px;
     background: $white;
@@ -46,10 +44,181 @@
         }
 
         p {
+            padding: 1em;
             text-overflow: ellipsis;
             text-align: start;
             font-size: 0.77em;
             max-height: 60%;
+        }
+    }
+}
+
+.choices-section {
+    position: relative;
+    margin-top: 30px;
+    padding: 30px;
+    width: 100%;
+    display: none;
+
+    background-color: $white;
+    border-radius: 20px;
+
+    &-active {
+        display: block;
+    }
+}
+
+.choices-title {
+    font: $semi-bold-fw 1.5rem / 1.8rem $serif-font-family;
+    margin-bottom: 20px;
+}
+
+.choices-button-container {
+    @include flexbox;
+}
+
+.choice-button {
+    // height: 150px;
+    width: 250px;
+    padding: 20px 30px;
+    border: 2px dashed $inactive-gray;
+    border-radius: 10px;
+    background-color: transparent;
+
+    @include flexbox;
+    @include flex-direction(column);
+
+    color: $inactive-gray;
+    cursor: pointer;
+    text-align: left;
+    vertical-align: top;
+    font: $regular-fw 1rem / 1.2rem $serif-font-family;
+    transition: all 0.3s ease-in-out;
+
+    &-active {
+        color: $dark-brown;
+        border: 2px solid $dark-brown;
+        border-spacing: 2px;
+    }
+
+    &:not(:first-child) {
+        margin-left: 30px;
+    }
+
+    &:hover,
+    &:active {
+        color: $dark-brown;
+        border-color: $dark-brown;
+    }
+}
+
+.choice-button-title {
+    margin-bottom: 20px;
+
+    font-size: 1.3rem;
+    line-height: 1.6rem;
+    font-weight: $semi-bold-fw;
+}
+
+.choice-button-line-title {
+    font-weight: $semi-bold-fw;
+}
+
+.choice-next-button {
+    background: $white;
+    color: $aqua;
+    position: relative;
+    float: right;
+    bottom: 3vh;
+    padding: 5px 15px;
+    border-radius: 20px;
+    border: 2px solid $aqua;
+    font: $bold-fw 1rem / 1.2rem $serif-font-family;
+    &:hover {
+        cursor: pointer;
+    }
+}
+
+.suboptions {
+    width: 100% !important;
+    height: 30%;
+    @include flexbox;
+    @include flex-direction(column);
+    h2 {
+        margin-bottom: 0.5em;
+    }
+    div {
+        width: 100%;
+        @include flexbox;
+        @include flex-direction(row);
+        align-items: flex-start;
+        padding: 0px;
+    }
+    label {
+        display: inline-block;
+        margin-right: 1em;
+        border-radius: 10px;
+        width: 40px;
+        height: 42px;
+        border: 2px solid $black;
+    }
+    input {
+        display: block;
+        &[type='radio']:checked {
+            box-shadow: 0 0 0 2px orange;
+        }
+    }
+}
+
+.upload {
+    width: 100% !important;
+    margin-top: 5em;
+    padding-top: 1em;
+    height: 30%;
+    border: 2px dashed $dark-gray;
+    border-radius: 10px;
+    @include flexbox;
+    @include flex-direction(column);
+    @include justify-content(center);
+    @include align-items(center);
+    &:hover {
+        cursor: pointer;
+    }
+    input[type='file'] {
+        opacity: 0;
+        z-index: -1;
+        position: absolute;
+    }
+    img {
+        width: 20px;
+        height: 20px;
+    }
+    div {
+        margin-top: 0.5em;
+        padding: 0px !important;
+        width: 100%;
+        height: 40px;
+        @include flexbox;
+        @include flex-direction(row);
+        @include justify-content(center);
+        @include align-items(center);
+        p,
+        span {
+            margin: 0px;
+            margin-top: 1em;
+            margin-right: 1em;
+            padding: 0px;
+            font-size: 0.8em;
+        }
+        p {
+            width: 50%;
+            max-width: 100%;
+            max-height: 100%;
+            text-overflow: ellipsis !important;
+            overflow: hidden;
+        }
+        span {
+            font-weight: bold;
         }
     }
 }
