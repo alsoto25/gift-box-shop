@@ -82,7 +82,9 @@
 
 /* Base styling */
 html,
-body {
+body,
+.root,
+#root {
   padding: 0;
   margin: 0;
   height: 100%;
