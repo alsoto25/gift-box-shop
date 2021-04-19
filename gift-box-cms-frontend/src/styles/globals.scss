@@ -3,70 +3,70 @@
 /* Fonts */
 @font-face {
   font-family: $serif-font;
-  src: url("/fonts/EB_Garamond/static/EBGaramond-Italic.ttf");
+  src: url("fonts/EB_Garamond/static/EBGaramond-Italic.ttf");
   font-weight: $regular-fw;
   font-style: italic;
   font-display: swap;
 }
 @font-face {
   font-family: $serif-font;
-  src: url("/fonts/EB_Garamond/static/EBGaramond-Regular.ttf");
+  src: url("fonts/EB_Garamond/static/EBGaramond-Regular.ttf");
   font-weight: $regular-fw;
   font-style: normal;
   font-display: swap;
 }
 @font-face {
   font-family: $serif-font;
-  src: url("/fonts/EB_Garamond/static/EBGaramond-MediumItalic.ttf");
+  src: url("fonts/EB_Garamond/static/EBGaramond-MediumItalic.ttf");
   font-weight: $medium-fw;
   font-style: italic;
   font-display: swap;
 }
 @font-face {
   font-family: $serif-font;
-  src: url("/fonts/EB_Garamond/static/EBGaramond-Medium.ttf");
+  src: url("fonts/EB_Garamond/static/EBGaramond-Medium.ttf");
   font-weight: $medium-fw;
   font-style: normal;
   font-display: swap;
 }
 @font-face {
   font-family: $serif-font;
-  src: url("/fonts/EB_Garamond/static/EBGaramond-SemiBoldItalic.ttf");
+  src: url("fonts/EB_Garamond/static/EBGaramond-SemiBoldItalic.ttf");
   font-weight: $semi-bold-fw;
   font-style: italic;
   font-display: swap;
 }
 @font-face {
   font-family: $serif-font;
-  src: url("/fonts/EB_Garamond/static/EBGaramond-SemiBold.ttf");
+  src: url("fonts/EB_Garamond/static/EBGaramond-SemiBold.ttf");
   font-weight: $semi-bold-fw;
   font-style: normal;
   font-display: swap;
 }
 @font-face {
   font-family: $serif-font;
-  src: url("/fonts/EB_Garamond/static/EBGaramond-BoldItalic.ttf");
+  src: url("fonts/EB_Garamond/static/EBGaramond-BoldItalic.ttf");
   font-weight: $bold-fw;
   font-style: italic;
   font-display: swap;
 }
 @font-face {
   font-family: $serif-font;
-  src: url("/fonts/EB_Garamond/static/EBGaramond-Bold.ttf");
+  src: url("fonts/EB_Garamond/static/EBGaramond-Bold.ttf");
   font-weight: $bold-fw;
   font-style: normal;
   font-display: swap;
 }
 @font-face {
   font-family: $serif-font;
-  src: url("/fonts/EB_Garamond/static/EBGaramond-ExtraBoldItalic.ttf");
+  src: url("fonts/EB_Garamond/static/EBGaramond-ExtraBoldItalic.ttf");
   font-weight: $extra-bold-fw;
   font-style: italic;
   font-display: swap;
 }
 @font-face {
   font-family: $serif-font;
-  src: url("/fonts/EB_Garamond/static/EBGaramond-ExtraBold.ttf");
+  src: url("fonts/EB_Garamond/static/EBGaramond-ExtraBold.ttf");
   font-weight: $extra-bold-fw;
   font-style: normal;
   font-display: swap;
@@ -74,7 +74,7 @@
 
 @font-face {
   font-family: $cursive-font;
-  src: url("/fonts/Leckerli_One/LeckerliOne-Regular.ttf");
+  src: url("fonts/Leckerli_One/LeckerliOne-Regular.ttf");
   font-weight: $regular-fw;
   font-style: normal;
   font-display: swap;
@@ -82,8 +82,7 @@
 
 /* Base styling */
 html,
-body,
-#__next {
+body {
   padding: 0;
   margin: 0;
   height: 100%;
