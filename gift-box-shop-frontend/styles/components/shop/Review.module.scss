@@ -1,0 +1,110 @@
+@import '../../utils.scss';
+
+.container-main {
+    transition: all 0.3s ease-in-out;
+    width: 17vw !important;
+    margin-top: 5vh;
+    padding: 1.8rem 1.5rem;
+    border-radius: 20px;
+    color: $inactive-gray;
+    background: $white;
+
+    &-active {
+        @include flexbox;
+        @include flex-direction(row);
+        @include justify-content(space-around);
+        @include align-items(space-around);
+
+        padding: 0.5rem 1.5rem;
+        position: absolute;
+        top: 12vh;
+        left: 20vw;
+        width: 75% !important;
+        max-height: 75vh;
+
+        margin: auto;
+
+        aside:nth-child(1) {
+            width: 65%;
+            height: 100%;
+            padding: 2rem;
+            img {
+                width: 100%;
+                height: 35vh;
+            }
+            p {
+                color: $dark-gray;
+                text-overflow: ellipsis !important;
+                overflow: hidden;
+            }
+        }
+
+        aside:nth-child(2) {
+            padding: 2rem;
+            width: 35%;
+
+            h1 {
+                margin: 0px;
+                font-size: 2rem;
+                font-weight: $medium-fw;
+                color: $aqua;
+                text-align: center;
+            }
+        }
+    }
+}
+
+.main-box {
+    h4 {
+        text-overflow: ellipsis !important;
+        overflow: hidden;
+    }
+}
+
+.borderBox {
+    width: 100%;
+    height: 8vh !important;
+
+    &-top {
+        h3 {
+            font-weight: $regular-fw;
+            color: $black;
+        }
+        border-bottom: 2px dashed $inactive-gray;
+    }
+    &-bottom {
+        h3 {
+            color: $black;
+        }
+        font-weight: $extra-bold-fw;
+        border-top: 2px dashed $inactive-gray;
+    }
+
+    h3 {
+        text-overflow: ellipsis !important;
+        overflow: hidden;
+
+        &:nth-child(odd) {
+            float: left;
+        }
+        &:nth-child(even) {
+            float: right;
+        }
+    }
+}
+
+.review-pay-button {
+    position: absolute;
+    bottom: 6%;
+    right: 5%;
+    background: #27c470;
+    color: $dark-gray;
+    padding: 5px 15px;
+    border-radius: 20px;
+    border: 2px solid $aqua;
+    font: $bold-fw 1rem / 1.2rem $serif-font-family;
+
+    &:hover {
+        cursor: pointer;
+    }
+}

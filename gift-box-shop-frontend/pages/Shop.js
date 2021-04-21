@@ -69,9 +69,6 @@ export default function Shop() {
                 step.options.map((option) => {
                     option.dropdowns.map((dropdown) => {
                         dropdownsToCheck.push(dropdown.id)
-                        // dropdown.options.map((suboption) => {
-                        //     suboption['suboptions'] ? alert('si tiene subOption') : null
-                        // })
                     })
                 })
             }
@@ -91,19 +88,22 @@ export default function Shop() {
                             currentStep={currentStep}
                             setCurrentStep={setCurrentStep}
                         />
+                        {stepsData.steps.map((step) =>
+                            step.isReview ? (
+                                <Review
+                                    isActive={currentStep === step.id}
+                                    userChoices={userChoices}
+                                    key={step.id}
+                                />
+                            ) : null,
+                        )}
                     </div>
                     <div className={styles['right-column']}>
                         {stepsData
                             ? stepsData.steps.map((step) =>
-                                  step.isReview ? (
-                                      <Review
-                                          isActive={currentStep === step.id}
-                                          userChoices={userChoices}
-                                          key={step.id}
-                                      />
-                                  ) : (
+                                  step.isReview ? null : (
                                       <DynamicStep
-                                          key={step.id}
+                                          key={step.id + 2}
                                           step={step}
                                           isActive={currentStep === step.id}
                                           userChoices={userChoices}
