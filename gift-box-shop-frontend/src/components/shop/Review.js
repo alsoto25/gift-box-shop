@@ -1,27 +1,39 @@
 import React, { useRef } from 'react'
-
-import styles from '../../../styles/components/shop/Review.module.scss'
 import { contactResponse } from '../../../test/contactResponse'
+import styles from '../../../styles/components/shop/Review.module.scss'
+import Swal from 'sweetalert2'
 
-export default function Review({ isActive, userChoices }) {
-    const dataReview = useRef([])
-    dataReview.current = []
-    for (var key in userChoices) {
-        if (key === 'steps') {
-            continue
-        }
-        dataReview.current.push([key, userChoices[key]])
-    }
-    console.clear()
-    console.log(userChoices)
-    console.log(dataReview.current)
+export default function Review({ isActive, userChoices, steps, basePrice, stepsList }) {
+    let total = useRef(0)
+    total.current = basePrice
 
     function handleClick() {
-        alert('pagar!')
+        Swal.fire({
+            title: 'Processing request',
+            html: 'Loading...',
+            timer: 2000,
+            timerProgressBar: true,
+            didOpen: () => {
+                Swal.showLoading()
+            },
+            willClose: () => {},
+        }).then((result) => {
+            if (result.dismiss === Swal.DismissReason.timer) {
+                Swal.fire({
+                    position: 'center',
+                    icon: 'success',
+                    title: 'Successful Request',
+                    showConfirmButton: true,
+                })
+                setTimeout(() => {
+                    window.location.reload(true)
+                }, 3000)
+            }
+        })
     }
     return (
         <>
-            {dataReview.current.length > 1 && (
+            {userChoices['box-contents-dropdown'] && (
                 <div
                     className={`${styles['container-main']} ${
                         isActive ? styles['container-main-active'] : ''
@@ -31,7 +43,7 @@ export default function Review({ isActive, userChoices }) {
                         <aside>
                             <img
                                 src={
-                                    'https://ohnatural.co.nz/wp-content/uploads/2019/12/gift-packaging-2.jpg'
+                                    'https://cdn.shopify.com/s/files/1/0063/5942/products/Rose_Gold_with_Gold_Foil_Beau_Bella_2000x.jpg?v=1591294565'
                                 }
                             />
                             <p>{contactResponse.info}</p>
@@ -41,18 +53,140 @@ export default function Review({ isActive, userChoices }) {
                         {isActive && <h1>Review</h1>}
                         <section className={`${styles['borderBox']} ${styles['borderBox-top']}`}>
                             <h3>Gift Box Base</h3>
-                            <h3>$10.00</h3>
+                            <h3>${basePrice}</h3>
                         </section>
-                        <div className={styles['main-box']}>
+
+                        <div>
+                            {steps.map((step, index) => {
+                                if (
+                                    stepsList.find(
+                                        (stp) => stp.id === step.id && step.id !== 'review-step',
+                                    )
+                                ) {
+                                    return (
+                                        <div>
+                                            <h3>{step.title}</h3>
+                                            {step.options &&
+                                                step.options.map((option) =>
+                                                    option.dropdowns.map((dropdown) => {
+                                                        if (
+                                                            dropdown.options.find(
+                                                                (opt) =>
+                                                                    userChoices[dropdown.id] ===
+                                                                        opt.id &&
+                                                                    dropdown.options.find(
+                                                                        (opti) =>
+                                                                            userChoices[
+                                                                                dropdown.id
+                                                                            ] === opti.id,
+                                                                    ).price,
+                                                            )
+                                                        ) {
+                                                            let currentPrice =
+                                                                dropdown.options.find(
+                                                                    (opti) =>
+                                                                        userChoices[dropdown.id] ===
+                                                                        opti.id,
+                                                                ).price + total.current
+                                                            total.current = currentPrice
+                                                            return (
+                                                                <div
+                                                                    className={
+                                                                        styles['choice-button-line']
+                                                                    }
+                                                                >
+                                                                    <div
+                                                                        className={`
+                                                                            ${styles['choice-button-line-title']}
+                                                                           
+                                                                        `}
+                                                                    >
+                                                                        <span>
+                                                                            -{' '}
+                                                                            {userChoices[
+                                                                                dropdown.id
+                                                                            ] &&
+                                                                                dropdown.options.find(
+                                                                                    (opt) =>
+                                                                                        userChoices[
+                                                                                            dropdown
+                                                                                                .id
+                                                                                        ] ===
+                                                                                        opt.id,
+                                                                                ).title}
+                                                                        </span>
+
+                                                                        <span>
+                                                                            {userChoices[
+                                                                                dropdown.id
+                                                                            ] &&
+                                                                            dropdown.options.find(
+                                                                                (opt) =>
+                                                                                    userChoices[
+                                                                                        dropdown.id
+                                                                                    ] === opt.id,
+                                                                            ).price
+                                                                                ? '+$' +
+                                                                                  dropdown.options.find(
+                                                                                      (opt) =>
+                                                                                          userChoices[
+                                                                                              dropdown
+                                                                                                  .id
+                                                                                          ] ===
+                                                                                          opt.id,
+                                                                                  ).price
+                                                                                : null}
+                                                                        </span>
+                                                                    </div>
+                                                                </div>
+                                                            )
+                                                        } else if (
+                                                            dropdown.options.find(
+                                                                (opt) =>
+                                                                    userChoices[dropdown.id] ===
+                                                                    opt.id,
+                                                            )
+                                                        ) {
+                                                            return (
+                                                                <div
+                                                                    className={`
+                                                                            ${styles['choice-button-line-subtitle']}
+                                                                        `}
+                                                                >
+                                                                    <span>
+                                                                        -{' ('}
+                                                                        {userChoices[dropdown.id] &&
+                                                                            dropdown.options.find(
+                                                                                (opt) =>
+                                                                                    userChoices[
+                                                                                        dropdown.id
+                                                                                    ] === opt.id,
+                                                                            ).title}
+                                                                        {')'}
+                                                                    </span>
+                                                                </div>
+                                                            )
+                                                        }
+                                                    }),
+                                                )}
+                                        </div>
+                                    )
+                                } else {
+                                    return null
+                                }
+                            })}
+                        </div>
+
+                        {/* <div className={styles['main-box']}>
                             {dataReview.current.map((choice) => (
                                 <h4>
                                     {choice[0]}:{choice[1]}
                                 </h4>
                             ))}
-                        </div>
+                        </div> */}
                         <section className={`${styles['borderBox']} ${styles['borderBox-bottom']}`}>
                             <h3>Total</h3>
-                            <h3>$15.00</h3>
+                            <h3>${total.current}</h3>
                         </section>
                     </aside>
                 </div>

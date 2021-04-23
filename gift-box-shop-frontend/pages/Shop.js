@@ -93,6 +93,9 @@ export default function Shop() {
                                 <Review
                                     isActive={currentStep === step.id}
                                     userChoices={userChoices}
+                                    steps={stepsData.steps}
+                                    basePrice={stepsData.basePrice}
+                                    stepsList={stepsList}
                                     key={step.id}
                                 />
                             ) : null,
