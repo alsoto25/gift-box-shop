@@ -27,7 +27,9 @@ export default function Contact() {
                 <div className={styles['card']}>
                     <div>
                         <h1>{textoAux.title}</h1>           
-                        <p>{textoAux.info}</p>
+                        <div>
+                            <p>{textoAux.info}</p>
+                        </div>
                     </div>
                     <img src={textoAux.image}></img>               
                 </div>
