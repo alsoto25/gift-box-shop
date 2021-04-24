@@ -13,7 +13,7 @@ export default function AboutMe() {
         //Fetch/Axios Request API
         setTimeout(() => {
           setAbout(aboutResponse)    
-        }, 300);
+        }, 200);
     
     }, [])
 
