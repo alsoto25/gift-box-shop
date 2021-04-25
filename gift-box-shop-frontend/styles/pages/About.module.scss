@@ -6,7 +6,7 @@
 }
 
 .social-container {
-    margin-top: 14vh;
+    margin-top: 0.8em;
     width: 100%;
     img {
         float: right;
@@ -14,6 +14,10 @@
         margin: 0.5vw;
         width: 20px;
         height: 20px;
+
+        &:hover{
+            cursor: pointer;
+        }
     }
 }
 
@@ -62,4 +66,9 @@
         margin: 0.5vh;
         text-align: justify;
     }
+}
+
+.texto{
+    width: 27.1vw;
+    min-height: 37.5vh;
 }
