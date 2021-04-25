@@ -6,13 +6,18 @@ var HttpStatus = require('http-status-codes');
 const admin = require('firebase-admin');
 var db = admin.database();
 
-router.get('/getExample', (req, res,next) => {
-    var test = {
-        uno: 'aaaa',
-        dos: 'bbbb'
-    }
-    //db.ref('prueba').push(test);
-    res.status(HttpStatus.NO_CONTENT).json({});
+router.get('/getStepsInfo', (req, res,next) => {
+    db.ref('contact').once('value', (snapshot) => {
+        const data = snapshot.val();
+        res.status(HttpStatus.OK).json({ contactResponse: data });
+    });
+});
+
+router.post('/setStepsInfo', (req, res,next) => {
+    db.ref('steps').set('req.body', (snapshot) => {
+        console.log(snapshot)
+        res.status(HttpStatus.NO_CONTENT).json();
+    });
 
 });
 

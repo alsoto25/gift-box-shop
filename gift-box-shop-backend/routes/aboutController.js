@@ -14,4 +14,22 @@ router.get('/getAboutInfo', (req, res,next) => {
 
 });
 
+router.post('/setAboutInfo', (req, res,next) => {
+    /*var data = {
+        name : "Isaaac Alfaro",
+        experience: "9",
+        location: "AAAAAAAAAA",
+        texto: "prueba",
+        imagen: "https://miro.medium.com/max/4242/1*NM6OfNli0X6vHJ9Ke0etcQ.jpeg",
+        facebook: "https://www.facebook.com/repasa2011.giftbox.cr/",
+        whatsapp: "https://wa.me/50683546060",
+        instagram: "https://www.instagram.com/reposteriarepasa/"
+    }*/
+    db.ref('about').set('req.body', (snapshot) => {
+        console.log(snapshot)
+        res.status(HttpStatus.NO_CONTENT).json();
+    });
+
+});
+
 module.exports = router;
