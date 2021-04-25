@@ -117,7 +117,6 @@ function ChoicesSection({
     tempSuboption,
     setTempSuboption,
 }) {
-    //Falta validar subOptions y dependencias
     function handleClick() {
         console.clear()
         stepsList.map((step, index) => {
@@ -156,13 +155,13 @@ function ChoicesSection({
                     } else {
                         Toast.fire({
                             icon: 'error',
-                            title: 'Seleccione TODOS los campos para continuar',
+                            title: 'Please select all options to continue',
                         })
                     }
                 } else {
                     Toast.fire({
                         icon: 'error',
-                        title: 'Seleccione los campos para continuar',
+                        title: 'Please select one option to continue',
                     })
                 }
             }
@@ -227,6 +226,7 @@ export default function DynamicStep({
     setStepsList,
     validateStep,
 }) {
+    //tempSuboption validar borrar subOption cuando cambie
     const [currentOption, setCurrentOption] = useState(0)
     const [currentSuboption, setCurrentSuboption] = useState({})
     const [tempSuboption, setTempSuboption] = useState({})
