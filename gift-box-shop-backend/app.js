@@ -11,6 +11,7 @@ admin.initializeApp({
     databaseURL: 'https://proyecto-gift-box-default-rtdb.firebaseio.com/'
 });
 
+var homeController = require('./routes/homeController');
 var aboutController = require('./routes/aboutController');
 var contactController = require('./routes/contactController');
 var shopStepsController = require('./routes/shopStepsController');
@@ -30,7 +31,7 @@ app.use((req, res, next) => {
     next();
 });
 
-
+app.use('/home', homeController);
 app.use('/about', aboutController);
 app.use('/contact', contactController);
 app.use('/shopSteps', shopStepsController);

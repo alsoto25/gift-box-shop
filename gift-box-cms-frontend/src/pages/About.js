@@ -2,19 +2,26 @@ import React, { useState, useEffect } from 'react'
 import PageWrapper from '../components/global/PageWrapper'
 import styles from '../styles/pages/About.module.scss'
 import Swal from 'sweetalert2/dist/sweetalert2.js'
+import axios from 'axios';
 import 'sweetalert2/src/sweetalert2.scss'
-
-// Testing imports
-import { aboutResponse } from '../test/aboutResponse'
 
 export default function AboutMe() {
 
     useEffect(() => {
         //Fetch/Axios Request API
-        setTimeout(() => {
-          setAbout(aboutResponse)    
-        }, 200);
-    
+        axios.get('http://localhost:3001/about/getAboutInfo')
+            .then(res => {
+                console.log('RES',res);
+                if(res.request.statusText==="OK"){
+                    setAbout(res.data.aboutResponse)
+                }
+                else if(res.request.statusText==="INTERNAL_SERVER_ERROR"){
+                    console.log('ERROR',res)
+                }
+            })
+            .catch(err => {
+                console.log(err)
+            })
     }, [])
 
     const [about, setAbout] = useState({});
@@ -22,9 +29,22 @@ export default function AboutMe() {
     const [currentFileName] = useState('')
     let nameSocial = ""
 
-    function saveChanges(){
+    function saveChanges(e){
       //Llamada al metodo que hace POST
-      console.log(about);
+        axios.post('http://localhost:3001/about/setAboutInfo', {about})
+            .then(res => {
+                console.log('RES',res);
+                if(res.request.statusText==="NO_CONTENT"){
+                    e.preventDefault();
+                    console.log("Enviando cambiooos");
+                }
+                else if(res.request.statusText==="INTERNAL_SERVER_ERROR"){
+                    console.log('ERROR',res)
+                }
+            })
+            .catch(err => {
+                console.log(err)
+            })
     }
 
     function handleForm(e){

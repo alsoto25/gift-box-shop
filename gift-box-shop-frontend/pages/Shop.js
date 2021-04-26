@@ -8,6 +8,7 @@ import Review from '../src/components/shop/Review'
 
 // Testing imports
 import { stepsResponse } from '../test/shopStepsResponse'
+import axios from "axios";
 
 export default function Shop() {
     const [currentStep, setCurrentStep] = useState('')
@@ -18,9 +19,19 @@ export default function Shop() {
 
     useEffect(() => {
         //Fetch/Axios Request API
-        setTimeout(function () {
-            setStepsData(stepsResponse)
-        }, 300)
+        axios.get('http://localhost:3001/shopSteps/getStepsInfo')
+            .then(res => {
+                console.log('RES',res);
+                if(res.request.statusText=="OK"){
+                    setStepsData(res.data.stepsResponse)
+                }
+                else if(res.request.statusText=="INTERNAL_SERVER_ERROR"){
+                    console.log('ERROR',res)
+                }
+            })
+            .catch(err => {
+                console.log(err)
+            })
     }, [])
 
     useEffect(() => {

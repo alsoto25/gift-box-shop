@@ -1,29 +1,51 @@
 import PageWrapper from '../components/global/PageWrapper'
 import styles from "../styles/pages/Contact.module.scss"
 import React, {useState, useEffect} from 'react'
-
-import { contactResponse } from '../test/contactResponse'
+import axios from 'axios';
 
 export default function Contact() {
 
-    useEffect(() => {
-        //Fetch/Axios Request API
-        setTimeout(function () {
-            setTextoAux(contactResponse);
-        }, 300)
-    }, [])
-
-    const [textoAux, setTextoAux] = useState({})
+    const [contact, setContact] = useState({})
 
     const [currentFileName] = useState('')
+
+    useEffect(() => {
+        //Fetch/Axios Request API
+        axios.get('http://localhost:3001/contact/getContactInfo')
+            .then(res => {
+                console.log('RES',res);
+                if(res.request.statusText==="OK"){
+                    setContact(res.data.contactResponse)
+                }
+                else if(res.request.statusText==="INTERNAL_SERVER_ERROR"){
+                    console.log('ERROR',res)
+                }
+            })
+            .catch(err => {
+                console.log(err)
+            })
+    }, [])
     
     function saveChanges(e){
-      e.preventDefault();
-      console.log("Enviando cambiooos");
+        axios.post('http://localhost:3001/contact/setContactInfo', {contact})
+            .then(res => {
+                console.log('RES',res);
+                if(res.request.statusText==="NO_CONTENT"){
+                    e.preventDefault();
+                    console.log("Enviando cambiooos");
+                }
+                else if(res.request.statusText==="INTERNAL_SERVER_ERROR"){
+                    console.log('ERROR',res)
+                }
+            })
+            .catch(err => {
+                console.log(err)
+            })
+
     }
 
     function handleForm(e){
-      setTextoAux({...textoAux, [e.target.name]:e.target.value});
+        setContact({...contact, [e.target.name]:e.target.value});
     }
 
     function HandleImages(e){
@@ -33,7 +55,7 @@ export default function Contact() {
         reader.onload=function(){
           console.log("Convert " + reader.result);
           var imageBase64 = reader.result;
-          setTextoAux({...textoAux, [e.target.name]:imageBase64});
+            setContact({...contact, [e.target.name]:imageBase64});
         }
       })
     }
@@ -65,8 +87,8 @@ export default function Contact() {
             <div className={styles['right-column']}>
                 <div className={styles['card']}>
                       <div>
-                        <input type="text" name="title" maxlength="40" value = {textoAux.title ? textoAux.title : ""} onChange = {handleForm}/>          
-                        <textarea onKeyDown = {enterReview} rows="15" cols="50" maxlength="600" name="info" value = {textoAux.info ? textoAux.info : ""} onChange = {handleForm}/>
+                        <input type="text" name="title" maxlength="40" value = {contact.title ? contact.title : ""} onChange = {handleForm}/>
+                        <textarea onKeyDown = {enterReview} rows="15" cols="50" maxlength="600" name="info" value = {contact.info ? contact.info : ""} onChange = {handleForm}/>
                       </div>
                       <label for="file-upload" className={styles['upload']}>
                         <input type="file" id="file-upload" name="image" onChange={HandleImages}/>
@@ -74,7 +96,7 @@ export default function Contact() {
                               {'Upload Your file'}
                               {currentFileName !== '' ? (null) : null}
                       </label>
-                    <img alt="pageImage" src={textoAux.image}></img>               
+                    <img alt="pageImage" src={contact.image}></img>
                 </div>
             </div>
         </div>

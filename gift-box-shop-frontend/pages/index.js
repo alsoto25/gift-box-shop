@@ -7,6 +7,7 @@ import "slick-carousel/slick/slick-theme.css";
 import styles from '../styles/pages/Home.module.scss'
 
 import { homeResponse } from '../test/homeResponse'
+import axios from "axios";
 
 export default function Home() {
 
@@ -14,9 +15,19 @@ export default function Home() {
 
     useEffect(() => {
         //Fetch/Axios Request API
-        setTimeout(function () {
-            setImages(homeResponse);
-        }, 300)
+        axios.get('http://localhost:3001/home/getHomeInfo')
+            .then(res => {
+                console.log('RES',res);
+                if(res.request.statusText=="OK"){
+                    setImages(res.data.homeResponse)
+                }
+                else if(res.request.statusText=="INTERNAL_SERVER_ERROR"){
+                    console.log('ERROR',res)
+                }
+            })
+            .catch(err => {
+                console.log(err)
+            })
     }, [])
 
    const settings = {
@@ -37,9 +48,9 @@ export default function Home() {
     return <PageWrapper>
         <div>
             <Slider {...settings}>
-                {images.map((img)=>{
+                {images.map((img,index)=>{
                     return(
-                        <img width="100%" height="460vh" src={img.url}/>
+                        <img key={index} width="100%" height="460vh" src={img.url}/>
                     )
                 })}
             </Slider>
