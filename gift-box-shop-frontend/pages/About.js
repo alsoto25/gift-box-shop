@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react'
 import Head from 'next/head'
 import PageWrapper from '../src/components/global/PageWrapper'
 import styles from '../styles/pages/About.module.scss'
+import axios from "axios";
 
 // Testing imports
 import { aboutResponse } from '../test/aboutResponse'
@@ -12,9 +13,19 @@ export default function AboutMe() {
 
     useEffect(() => {
         //Fetch/Axios Request API
-        setTimeout(function () {
-            setAbout(aboutResponse)
-        }, 300)
+        axios.get('http://localhost:3001/about/getAboutInfo')
+            .then(res => {
+                console.log('RES',res);
+                if(res.request.statusText=="OK"){
+                    setAbout(res.data.aboutResponse)
+                }
+                else if(res.request.statusText=="INTERNAL_SERVER_ERROR"){
+                    console.log('ERROR',res)
+                }
+            })
+            .catch(err => {
+                console.log(err)
+            })
     }, [])
 
     console.log(about);

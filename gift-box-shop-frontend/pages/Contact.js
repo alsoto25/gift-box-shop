@@ -3,18 +3,29 @@ import PageWrapper from '../src/components/global/PageWrapper'
 import styles from "../styles/pages/Contact.module.scss"
 import React, {useState, useEffect} from 'react'
 import ContactForm from '../src/components/contact/ContactForm'
-
+import axios from "axios";
 import { contactResponse } from '../test/contactResponse'
+
 
 export default function Contact() {
 
-    const [textoAux, setTextoAux] = useState({})
+    const [contact, setContact] = useState({})
 
     useEffect(() => {
         //Fetch/Axios Request API
-        setTimeout(function () {
-            setTextoAux(contactResponse);
-        }, 300)
+        axios.get('http://localhost:3001/contact/getContactInfo')
+            .then(res => {
+                console.log('RES',res);
+                if(res.request.statusText=="OK"){
+                    setContact(res.data.contactResponse)
+                }
+                else if(res.request.statusText=="INTERNAL_SERVER_ERROR"){
+                    console.log('ERROR',res)
+                }
+            })
+            .catch(err => {
+                console.log(err)
+            })
     }, [])
 
     return (
@@ -26,12 +37,12 @@ export default function Contact() {
             <div className={styles['right-column']}>
                 <div className={styles['card']}>
                     <div>
-                        <h1>{textoAux.title}</h1>           
+                        <h1>{contact.title}</h1>
                         <div>
-                            <p>{textoAux.info}</p>
+                            <p>{contact.info}</p>
                         </div>
                     </div>
-                    <img src={textoAux.image}></img>               
+                    <img src={contact.image}></img>
                 </div>
             </div>
         </div>

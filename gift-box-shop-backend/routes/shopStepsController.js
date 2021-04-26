@@ -7,9 +7,9 @@ const admin = require('firebase-admin');
 var db = admin.database();
 
 router.get('/getStepsInfo', (req, res,next) => {
-    db.ref('contact').once('value', (snapshot) => {
+    db.ref('steps').once('value', (snapshot) => {
         const data = snapshot.val();
-        res.status(HttpStatus.OK).json({ contactResponse: data });
+        res.status(HttpStatus.OK).json({ stepsResponse: data });
     });
 });
 

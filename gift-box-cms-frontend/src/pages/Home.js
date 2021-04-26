@@ -4,16 +4,25 @@ import Slider from 'react-slick';
 import "slick-carousel/slick/slick.css"; 
 import "slick-carousel/slick/slick-theme.css";
 import styles from '../styles/pages/Home.module.scss'
-
-import { homeResponse } from '../test/homeResponse'
+import axios from 'axios';
 
 export default function Home() {
 
     useEffect(() => {
         //Fetch/Axios Request API
-        setTimeout(function () {
-            setImages(homeResponse);
-        }, 300)
+        axios.get('http://localhost:3001/home/getHomeInfo')
+            .then(res => {
+                console.log('RES',res);
+                if(res.request.statusText==="OK"){
+                    setImages(res.data.homeResponse)
+                }
+                else if(res.request.statusText==="INTERNAL_SERVER_ERROR"){
+                    console.log('ERROR',res)
+                }
+            })
+            .catch(err => {
+                console.log(err)
+            })
     }, [])
 
     const [images, setImages] = useState([]);
@@ -42,9 +51,23 @@ export default function Home() {
         setImages(listCurrent);
     }
 
-    function saveChanges(){
+    function saveChanges(e){
      //Lamada a metodo POST
-     console.log("Imprimiendo");
+        axios.post('http://localhost:3001/home/setHomeInfo', {images})
+            .then(res => {
+                console.log('RES',res);
+                if(res.request.statusText==="NO_CONTENT"){
+                    e.preventDefault();
+                    console.log("Enviando cambiooos");
+                }
+                else if(res.request.statusText==="INTERNAL_SERVER_ERROR"){
+                    console.log('ERROR',res)
+                }
+            })
+            .catch(err => {
+                console.log(err)
+            })
+
   }
 
    const settings = {
@@ -76,9 +99,9 @@ export default function Home() {
               <Slider {...settings} afterChange={(current)=>{
               setCurrent(current);
             }}>
-                {images.map((img)=>{      
+                {images.map((img,index)=>{
                     return(
-                        <img key={img.id} alt="imageSlider" width="100%" height="460vh" src={img.url}/>
+                        <img key={index} alt="imageSlider" width="100%" height="460vh" src={img.url}/>
                     ) 
                 })}
             </Slider> : 

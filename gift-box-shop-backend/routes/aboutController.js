@@ -10,6 +10,9 @@ router.get('/getAboutInfo', (req, res,next) => {
     db.ref('about').once('value', (snapshot) => {
         const data = snapshot.val();
         res.status(HttpStatus.OK).json({ aboutResponse: data });
+    })
+    .catch( err => {
+        res.status(HttpStatus.INTERNAL_SERVER_ERROR).json({ err: err });
     });
 
 });
@@ -25,9 +28,12 @@ router.post('/setAboutInfo', (req, res,next) => {
         whatsapp: "https://wa.me/50683546060",
         instagram: "https://www.instagram.com/reposteriarepasa/"
     }*/
-    db.ref('about').set('req.body', (snapshot) => {
+    db.ref('about').set(req.body.about, (snapshot) => {
         console.log(snapshot)
         res.status(HttpStatus.NO_CONTENT).json();
+    })
+    .catch( err => {
+        res.status(HttpStatus.INTERNAL_SERVER_ERROR).json({ err: err });
     });
 
 });
