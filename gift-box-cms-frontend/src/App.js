@@ -3,7 +3,9 @@ import Orders from "./pages/Orders";
 import Content from "./pages/Content";
 import Contact from "./pages/Contact";
 import About from "./pages/About";
+import Login from "./components/global/Login";
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
+
 
 function App() {
   return (
@@ -13,7 +15,8 @@ function App() {
         <Route exact path="/Content" component={Content} />
         <Route exact path="/Contact" component={Contact} />
         <Route exact path="/About" component={About} />
-        <Route exact path="/" component={Home} />
+        <Route exact path="/Home" component={Home} />
+        <Route exact path="/" component={Login} />
       </Switch>
     </Router>
   );
