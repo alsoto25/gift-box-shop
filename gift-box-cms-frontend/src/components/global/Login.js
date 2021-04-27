@@ -45,14 +45,16 @@ export default function Login(props) {
      .then(res => {
          console.log('RES',res);
          if(res.request.statusText==="OK"){
-             props.history.push("/home")
+             if(res.data.LOGIN){
+                 props.history.push("/home")
+             }
+             else{
+                 return Swal.fire('Error', 'Usuario o Contraseña invalida', 'error');
+             }
          }
          else if(res.request.statusText==="INTERNAL_SERVER_ERROR"){
              console.log('ERROR',res)     
          }
-         else if(!apiRes){
-          return Swal.fire('Error', 'Usuario o Contraseña invalida', 'error');
-        }
      })
      .catch(err => {
          console.log(err)
