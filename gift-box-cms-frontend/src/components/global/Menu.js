@@ -6,7 +6,7 @@ import styles from "../../styles/components/global/Header.module.scss";
 const menuItems = [
   {
     text: "Home",
-    url: "/",
+    url: "/Home",
   },
   {
     text: "Orders",
