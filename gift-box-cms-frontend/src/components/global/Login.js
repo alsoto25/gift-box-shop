@@ -1,12 +1,12 @@
 import Footer from "./Footer";
 import { Link } from "react-router-dom";
-import React, { useState, useEffect } from 'react'
+import React, { useState } from 'react'
 import Swal from 'sweetalert2';
 import axios from 'axios';
+import CryptoJS from "crypto-js"
 
 import styles from "../../styles/components/global/Header.module.scss";
 import stylesCard from '../../styles/pages/Login.module.scss'
-import CryptoJS from "crypto-js"
 
 export default function Login(props) {
 
@@ -15,26 +15,13 @@ export default function Login(props) {
     password: ""
   });
 
-  useEffect(() => {
-
-    console.log("Iniciando sesion");
-
-    return () => {
-      console.log("Iniciando sesion");
-    }
-  }, [])
-
   function handleForm(e){
     setUser({...user, [e.target.name]:e.target.value})
   }
 
   function startLogin(){
-    //Se le envian los datos al BE y me retorna si esta bien o no el login
-    console.log("Iniciando sesion");
     const {username, password} = user;
     const encryptPassword = "boxgift#2021";
-
-    const apiRes = false;
 
     const userEncrypted = {
       username:CryptoJS.AES.encrypt(username,encryptPassword).toString(),
