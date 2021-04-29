@@ -24,6 +24,10 @@ const menuItems = [
     text: "About",
     url: "/About",
   },
+  // {
+  //   text: "Sign out",
+  //   url: "/",
+  // },
 ];
 
 const BurgerMenu = ({ open, setOpen }) => {
@@ -62,6 +66,11 @@ const MenuElements = ({ open }) => {
           {menuItem.text}
         </Link>
       ))}
+
+      <Link key="signout" to="/" className={`${styles.link} ${router.pathname === "/" ? styles["link-active"] : ""}`}> 
+      Sign Out 
+      </Link>   
+
     </div>
   );
 };

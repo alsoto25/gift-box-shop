@@ -6,7 +6,6 @@ import axios from 'axios';
 export default function Contact() {
 
     const [contact, setContact] = useState({})
-
     const [currentFileName] = useState('')
 
     useEffect(() => {
@@ -73,15 +72,15 @@ export default function Contact() {
         <div className={styles['contact-container']}>
 
             <div className={styles['left-column']}>
-              <form onSubmit = {saveChanges} className={styles['form-container']}>
+              <div className={styles['form-container']}>
                 <h1>Contact</h1>
                 <input placeholder="Full Name:" type="text" name="name" disabled/>
                 <input placeholder="Email:" type="text" name="email" disabled/>
-                <textarea name="message" rows="4" cols="50" placeholder="Message:" disabled/>
+                <textarea name="message" rows="4" cols="50" maxlength="600" placeholder="Message:" disabled/>
                 <div> 
-                    <input type="submit" value="Save Changes" />
+                    <button onClick = {saveChanges}>Save Changes</button>
                 </div>
-              </form>     
+              </div>     
             </div>
 
             <div className={styles['right-column']}>

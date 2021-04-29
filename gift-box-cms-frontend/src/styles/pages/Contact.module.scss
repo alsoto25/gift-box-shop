@@ -42,26 +42,29 @@
         &::placeholder {
             color: $inactive-gray;
         }
+    }
 
-        &:last-child {
-            position: relative;
-            background-color: $white;
-            color: $aqua;
-            border-color: $aqua;
-            font-size: 10px;
-            font-weight: bold;
-            width: 8vw;
-            height: 3vh;
-            padding: 0, 5em;
-            text-align: center;
-            right: 0px !important;
-            float: right;
-            margin: 0%;
-            padding: 0%;
-            &:hover {
-                cursor: pointer;
-            }
+    button{
+        position: relative;
+        background-color: $white;
+        color: $aqua;
+        border-color: $aqua;
+        border-radius: 15px;
+        font-size: 10px;
+        font-weight: bold;
+        width: 8vw;
+        height: 3.1vh;
+        padding: 0, 5em;
+        text-align: center;
+        right: 0px !important;
+        float: right;
+        margin: 0%;
+        padding: 0%;
+        margin-right: 2px;
+        &:hover {
+            cursor: pointer;
         }
+        
     }
 
     div:last-child {
