@@ -8,6 +8,7 @@ export default function Review({ isActive, userChoices, steps, basePrice, stepsL
     total.current = basePrice
 
     function handleClick() {
+        console.log(userChoices)
         Swal.fire({
             title: 'Processing request',
             html: 'Loading...',
@@ -64,7 +65,7 @@ export default function Review({ isActive, userChoices, steps, basePrice, stepsL
                                     )
                                 ) {
                                     return (
-                                        <div>
+                                        <div key={step.id}>
                                             <h3>{step.title}</h3>
                                             {step.options &&
                                                 step.options.map((option) =>
@@ -94,6 +95,7 @@ export default function Review({ isActive, userChoices, steps, basePrice, stepsL
                                                                     className={
                                                                         styles['choice-button-line']
                                                                     }
+                                                                    key={option.id}
                                                                 >
                                                                     <div
                                                                         className={`

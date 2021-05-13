@@ -20,7 +20,7 @@ function DynamicDropdown({ dropdown, userChoices, handleChange }) {
             name={dropdown.id}
             onChange={handleChange}
             disabled={dropdown.dependencyId && !userChoices[dropdown.dependencyId]}
-            value={userChoices[dropdown.id] ? userChoices[dropdown.id] : null}
+            value={userChoices[dropdown.id] ? userChoices[dropdown.id] : ''}
         >
             {dropdown.options.map((option) => {
                 if (
@@ -36,7 +36,6 @@ function DynamicDropdown({ dropdown, userChoices, handleChange }) {
                     <option
                         value={option.id === 'default' ? '' : option.id}
                         disabled={option.disabled}
-                        selected={option.selected}
                         key={option.id}
                     >
                         {option.title}
@@ -117,8 +116,53 @@ function ChoicesSection({
     tempSuboption,
     setTempSuboption,
 }) {
+    console.log(step)
+
+    function createChoices(choiceIndex = -1) {
+        return step.options.map((option, index) => (
+            <button
+                className={`${styles['choice-button']}${
+                    currentOption === index ? ` ${styles['choice-button-active']}` : ''
+                }`}
+                type="button"
+                key={choiceIndex === -1 ? option.id : `${option.id}-${choiceIndex}`}
+                onClick={function () {
+                    setHaveSuboption(false)
+                    setCurrentOption(index)
+                }}
+            >
+                <div className={styles['choice-button-title']}>
+                    {option.title}
+                    {choiceIndex === -1 ? '' : ` ${choiceIndex}`}
+                </div>
+                {option.dropdowns.map((dropdown) => {
+                    return (
+                        <div
+                            key={choiceIndex === -1 ? dropdown.id : `${dropdown.id}-${choiceIndex}`}
+                            className={styles['choice-button-line']}
+                        >
+                            -{' '}
+                            <span className={styles['choice-button-line-title']}>
+                                {dropdown.name}
+                            </span>
+                            :{' '}
+                            {choiceIndex === -1
+                                ? userChoices[dropdown.id]
+                                : userChoices[`${dropdown.id}-${choiceIndex}`]
+                                ? dropdown.options.find((opt) =>
+                                      choiceIndex === -1
+                                          ? userChoices[dropdown.id] === opt.id
+                                          : userChoices[`${dropdown.id}-${choiceIndex}`] === opt.id,
+                                  ).title
+                                : 'None'}
+                        </div>
+                    )
+                })}
+            </button>
+        ))
+    }
+
     function handleClick() {
-        console.clear()
         stepsList.map((step, index) => {
             if (step.id === currentStep) {
                 if (index + 1 <= stepsList.length - 1) {
@@ -129,15 +173,10 @@ function ChoicesSection({
                         setCurrentStep(stepsList[index + 1].id)
                         window.scrollTo(0, 0)
 
-                        console.log(userChoices)
-                        console.log(tempSuboption)
-
                         if (tempSuboption !== {}) {
                             for (var tempKey in tempSuboption) {
                                 let copy = { ...userChoices }
-                                console.log(copy)
                                 delete copy[tempKey]
-                                console.log(copy)
                                 setUserChoices(copy)
                                 break
                             }
@@ -151,7 +190,6 @@ function ChoicesSection({
                             setTempSuboption({ ...currentSuboption })
                             break
                         }
-                        console.log(userChoices)
                     } else {
                         Toast.fire({
                             icon: 'error',
@@ -176,37 +214,11 @@ function ChoicesSection({
         >
             <div className={styles['choices-title']}>{step.title}</div>
             <div className={styles['choices-button-container']}>
-                {step.options.map((option, index) => (
-                    <button
-                        className={`${styles['choice-button']}${
-                            currentOption === index ? ` ${styles['choice-button-active']}` : ''
-                        }`}
-                        type="button"
-                        onClick={function () {
-                            setHaveSuboption(false)
-                            setCurrentOption(index)
-                        }}
-                    >
-                        <div className={styles['choice-button-title']}>{option.title}</div>
-                        {option.dropdowns.map((dropdown) => {
-                            //console.log(dropdown)
-                            return (
-                                <div className={styles['choice-button-line']}>
-                                    -{' '}
-                                    <span className={styles['choice-button-line-title']}>
-                                        {dropdown.name}
-                                    </span>
-                                    :{' '}
-                                    {userChoices[dropdown.id]
-                                        ? dropdown.options.find(
-                                              (opt) => userChoices[dropdown.id] === opt.id,
-                                          ).title
-                                        : 'None'}
-                                </div>
-                            )
-                        })}
-                    </button>
-                ))}
+                {step.amount > 0
+                    ? Array(step.amount)
+                          .fill(0)
+                          .map((x, index) => createChoices(index + 1))
+                    : createChoices()}
             </div>
             <button className={styles['choice-next-button']} type="button" onClick={handleClick}>
                 Continue

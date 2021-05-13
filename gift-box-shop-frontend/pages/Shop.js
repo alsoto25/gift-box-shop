@@ -8,7 +8,7 @@ import Review from '../src/components/shop/Review'
 
 // Testing imports
 import { stepsResponse } from '../test/shopStepsResponse'
-import axios from "axios";
+import axios from 'axios'
 
 export default function Shop() {
     const [currentStep, setCurrentStep] = useState('')
@@ -19,18 +19,17 @@ export default function Shop() {
 
     useEffect(() => {
         //Fetch/Axios Request API
-        axios.get('http://localhost:3001/shopSteps/getStepsInfo')
-            .then(res => {
-                console.log('RES',res);
-                if(res.request.statusText=="OK"){
+        axios
+            .get('http://localhost:3001/shopSteps/getStepsInfo')
+            .then((res) => {
+                if (res.request.statusText == 'OK') {
                     setStepsData(res.data.stepsResponse)
-                }
-                else if(res.request.statusText=="INTERNAL_SERVER_ERROR"){
-                    console.log('ERROR',res)
+                } else if (res.request.statusText == 'INTERNAL_SERVER_ERROR') {
+                    // console.log('ERROR', res)
                 }
             })
-            .catch(err => {
-                console.log(err)
+            .catch((err) => {
+                // console.log(err)
             })
     }, [])
 
@@ -45,6 +44,10 @@ export default function Shop() {
                     id: initialStep.id,
                     title: initialStep.title,
                     isComplete: false,
+                    options: initialStep.options,
+                    isInitial: initialStep.isInitial,
+                    isDefault: initialStep.isDefault,
+                    isReview: initialStep.isReview,
                 },
             ])
         }
@@ -63,6 +66,10 @@ export default function Shop() {
                                 title: step.title,
                                 isComplete: false,
                                 amount: userStep && userStep.amount ? userStep.amount : -1,
+                                options: step.options,
+                                isInitial: step.isInitial,
+                                isDefault: step.isDefault,
+                                isReview: step.isReview,
                             },
                         ]
                     }
@@ -99,7 +106,7 @@ export default function Shop() {
                             currentStep={currentStep}
                             setCurrentStep={setCurrentStep}
                         />
-                        {stepsData.steps.map((step) =>
+                        {stepsList.map((step) =>
                             step.isReview ? (
                                 <Review
                                     isActive={currentStep === step.id}
@@ -113,8 +120,8 @@ export default function Shop() {
                         )}
                     </div>
                     <div className={styles['right-column']}>
-                        {stepsData
-                            ? stepsData.steps.map((step) =>
+                        {stepsList
+                            ? stepsList.map((step) =>
                                   step.isReview ? null : (
                                       <DynamicStep
                                           key={step.id + 2}
