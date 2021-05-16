@@ -1,6 +1,4 @@
 import Link from 'next/link'
-import { useRouter } from 'next/router'
-
 import Menu from './Menu'
 
 import styles from '../../../styles/components/global/Header.module.scss'

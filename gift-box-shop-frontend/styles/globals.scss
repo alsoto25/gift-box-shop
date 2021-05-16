@@ -129,8 +129,19 @@ main {
     width: 100%;
     max-width: 1600px;
     display: block;
-    padding: 20px 7.5vw;
     margin: 0 auto;
+}
+
+.main-content-margin {
+    margin: 20px 7.5vw;
+
+    @include respond-to('small') {
+        margin: 20px 5vw;
+    }
+}
+
+.main-content-padding {
+    padding: 20px 7.5vw;
 
     @include respond-to('small') {
         padding: 20px 5vw;

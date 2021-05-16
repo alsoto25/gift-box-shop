@@ -1,14 +1,10 @@
-.slides {
-    position: relative;
-    li button::before{
-      color: white !important;
-    } 
+@import '../utils.scss';
+
+.testimonials-container {
+    margin: 15px auto;
+    width: 100%;
+
+    background: $white;
+    -webkit-box-shadow: inset 5px 5px 15px -2px rgba(0, 0, 0, 0.2);
+    box-shadow: inset 5px 5px 15px -2px rgba(0, 0, 0, 0.2);
 }
-
-
-
-
-
-
-
- 

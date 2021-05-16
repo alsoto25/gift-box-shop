@@ -1,59 +1,50 @@
-import Head from 'next/head'
-import React, {useState, useEffect} from 'react';
+import React, { useState, useEffect } from 'react'
+import Carousel from '../src/components/home/Carousel'
+import Testimonials from '../src/components/home/Testimonials'
+import ShopSocials from '../src/components/home/ShopSocials'
+
 import PageWrapper from '../src/components/global/PageWrapper'
-import Slider from 'react-slick';
-import "slick-carousel/slick/slick.css"; 
-import "slick-carousel/slick/slick-theme.css";
 import styles from '../styles/pages/Home.module.scss'
 
-import { homeResponse } from '../test/homeResponse'
-import axios from "axios";
+import axios from 'axios'
+import homeResponse from '../test/homeResponse'
 
 export default function Home() {
-
-    const [images, setImages] = useState([]);
+    const [content, setContent] = useState(null)
 
     useEffect(() => {
+        setContent(homeResponse)
         //Fetch/Axios Request API
-        axios.get('http://localhost:3001/home/getHomeInfo')
-            .then(res => {
-                console.log('RES',res);
-                if(res.request.statusText=="OK"){
-                    setImages(res.data.homeResponse)
-                }
-                else if(res.request.statusText=="INTERNAL_SERVER_ERROR"){
-                    console.log('ERROR',res)
-                }
-            })
-            .catch(err => {
-                console.log(err)
-            })
+        // axios
+        //     .get('http://localhost:3001/home/getHomeInfo')
+        //     .then((res) => {
+        //         // console.log('RES', res)
+        //         if (res.request.statusText == 'OK') {
+        //             setContent(res.data.homeResponse)
+        //         } else if (res.request.statusText == 'INTERNAL_SERVER_ERROR') {
+        //             // console.log('ERROR', res)
+        //         }
+        //     })
+        //     .catch((err) => {
+        //         // console.log(err)
+        //     })
     }, [])
 
-   const settings = {
-    dots: true,
-    arrows: true,
-    infinite: true,
-    fade: true,
-    speed: 800,
-    slidesToShow: 1,
-    slidesToScroll: 1,
-    autoplay: true,
-    autoplaySpeed: 6000,
-    className: styles['slides'],
-    lazyLoad: true,
-    pauseOnHover: true,
-  };
-
-    return <PageWrapper>
-        <div>
-            <Slider {...settings}>
-                {images.map((img,index)=>{
-                    return(
-                        <img key={index} width="100%" height="460vh" src={img.url}/>
-                    )
-                })}
-            </Slider>
-        </div>
-    </PageWrapper>
+    return (
+        <PageWrapper>
+            {content && (
+                <>
+                    <Carousel slides={content.slides} />
+                    <Testimonials
+                        className={styles['testimonials-container']}
+                        content={content.testimonials}
+                    />
+                    <ShopSocials
+                        className={styles['shop-socials-container']}
+                        content={content.socials}
+                    />
+                </>
+            )}
+        </PageWrapper>
+    )
 }
