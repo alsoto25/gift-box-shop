@@ -19,14 +19,13 @@
     max-width: 300px;
 
     img {
-        float: right;
-        text-align: right;
-        margin: 0.5vw;
         width: 40px;
         height: 40px;
+        transition: all 0.3s;
 
         &:hover {
             cursor: pointer;
+            @include transform(scale(1.25));
         }
     }
 
@@ -92,12 +91,12 @@
     h1 {
         color: $aqua;
         width: 100%;
-        margin: 2vh auto;
+        margin: 20px auto;
         text-align: center;
     }
 
     p {
-        margin: 0.5vh;
+        margin: 5px 0;
         text-align: justify;
     }
 }
