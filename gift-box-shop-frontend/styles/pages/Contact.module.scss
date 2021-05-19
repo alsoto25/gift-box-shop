@@ -92,8 +92,6 @@
     border: 3px solid $dark-brown;
     border-radius: 50px;
 
-    cursor: pointer;
-    color: $dark-brown;
     font-size: 14px;
     font-family: $serif-font-family;
     font-weight: $bold-fw;
@@ -103,11 +101,41 @@
 
     transition: all 0.3s;
 
-    &:hover {
-        font-weight: $bold-fw;
-        color: $white;
-        background-color: $dark-brown;
+    &:not(:disabled) {
+        cursor: pointer;
+        color: $dark-brown;
+        border: 3px solid $dark-brown;
+
+        &:hover {
+            font-weight: $bold-fw;
+            color: $white;
+            background-color: $dark-brown;
+        }
     }
+
+    &-sending {
+        color: $inactive-gray-light;
+        background-color: $inactive-gray;
+        border: 3px solid $inactive-gray;
+    }
+
+    &-complete {
+        color: $inactive-gray-light;
+        background-color: $inactive-gray;
+        border: 3px solid $inactive-gray;
+    }
+}
+
+.contact-form-submit-sending:disabled {
+    color: $inactive-gray-light;
+    background-color: $inactive-gray;
+    border: 3px solid $inactive-gray;
+}
+
+.contact-form-submit-complete:disabled {
+    color: $dark-brown;
+    background-color: $inactive-success;
+    border: 3px solid $inactive-success;
 }
 
 .left-column {
@@ -185,7 +213,6 @@
     background-color: none;
     color: red;
     text-align: left;
-    text-transform: uppercase;
     max-width: 100%;
-    padding: 10px 0;
+    margin: 0;
 }

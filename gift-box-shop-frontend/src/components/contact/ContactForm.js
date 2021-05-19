@@ -1,58 +1,56 @@
 import React, { useState } from 'react'
 import styles from '../../../styles/pages/Contact.module.scss'
+
 export default function ContactForm() {
     const [alertMessage, setAlertMessage] = useState('')
     const [name, setName] = useState('')
     const [email, setEmail] = useState('')
     const [message, setMessage] = useState('')
-    const [error, setError] = useState(false)
-    const [submitForm, setSubmitForm] = useState(false)
+    const [status, setStatus] = useState('')
 
     function validation(e) {
         e.preventDefault()
 
-        const nameFormat = new RegExp('^[A-Z]+$', 'i')
         const emailFormat = new RegExp(
-            /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/,
+            /^(?:[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*|"(?:[\x01-\x08\x0b\x0c\x0e-\x1f\x21\x23-\x5b\x5d-\x7f]|\\[\x01-\x09\x0b\x0c\x0e-\x7f])*")@(?:(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?|\[(?:(?:(2(5[0-5]|[0-4][0-9])|1[0-9][0-9]|[1-9]?[0-9]))\.){3}(?:(2(5[0-5]|[0-4][0-9])|1[0-9][0-9]|[1-9]?[0-9])|[a-z0-9-]*[a-z0-9]:(?:[\x01-\x08\x0b\x0c\x0e-\x1f\x21-\x5a\x53-\x7f]|\\[\x01-\x09\x0b\x0c\x0e-\x7f])+)\])$/,
         )
 
         if (name === '' || email === '' || message === '') {
-            setAlertMessage('All spaces are required')
-            setSubmitForm(false)
-            setError(true)
-            return
-        } else if (!nameFormat.test(name)) {
-            setAlertMessage('The name can only have letters')
-            setSubmitForm(false)
-            setError(true)
+            setAlertMessage('Error: All spaces are required.')
+            setStatus('error')
             return
         } else if (!emailFormat.test(email)) {
-            setAlertMessage('Invalid email')
-            setSubmitForm(false)
-            setError(true)
+            setAlertMessage('Error: Invalid email.')
+            setStatus('error')
             return
         }
-        setError(false)
+        setStatus('sending')
         submitted(e)
     }
 
     function submitted(e) {
-        setSubmitForm(true)
-        setAlertMessage('Form sent successfully')
-
         const request = {
             name: name,
             email: email,
             message: message,
         }
 
-        console.log('Sending...')
-        console.log(request)
-
         setTimeout(() => {
-            setSubmitForm(false)
-            e.target.reset()
-        }, 3000)
+            setStatus('complete')
+        }, 5000)
+
+        // axios
+        //     .post('http://localhost:3001/contact/postContactForm', request)
+        //     .then((res) => {
+        //         if (res.request.statusText == 'OK') {
+        //             setStatus('complete')
+        //         } else if (res.request.statusText == 'INTERNAL_SERVER_ERROR') {
+        //             setStatus('error')
+        //         }
+        //     })
+        //     .catch((err) => {
+        //         setStatus('error')
+        //     })
     }
 
     return (
@@ -87,11 +85,20 @@ export default function ContactForm() {
                 placeholder="Message:"
             ></textarea>
 
-            {error ? <p className={styles['error']}>{alertMessage}</p> : null}
-            {submitForm ? <p className={styles['correct']}>{alertMessage}</p> : null}
+            {status === 'error' ? <p className={styles['error']}>{alertMessage}</p> : null}
 
-            <button className={styles['contact-form-submit']} type="submit">
-                Submit
+            <button
+                className={`${styles['contact-form-submit']} ${
+                    status === 'sending'
+                        ? styles['contact-form-submit-sending']
+                        : status === 'complete'
+                        ? styles['contact-form-submit-complete']
+                        : ''
+                }`}
+                type="submit"
+                disabled={status === 'sending' || status === 'complete' ? true : false}
+            >
+                {status === 'sending' ? 'Sending...' : status === 'complete' ? 'Sent!' : 'Submit'}
             </button>
         </form>
     )
