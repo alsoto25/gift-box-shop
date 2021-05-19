@@ -23,7 +23,8 @@
         height: 40px;
         transition: all 0.3s;
 
-        &:hover {
+        &:hover,
+        &:focus {
             cursor: pointer;
             @include transform(scale(1.25));
         }
@@ -85,7 +86,6 @@
 
     height: 100%;
     background-color: white;
-    color: $inactive-gray;
     font-family: $serif-font-family;
     font-size: 1.1rem;
     width: 100%;
@@ -103,6 +103,11 @@
     p {
         margin: 5px 0;
         text-align: justify;
+        color: $dark-brown;
+
+        strong {
+            color: $dark-aqua;
+        }
     }
 
     @include respond-to('small') {
