@@ -1,4 +1,5 @@
 import React, { useState } from 'react'
+import Swal from 'sweetalert2'
 import styles from '../../../styles/pages/Contact.module.scss'
 
 export default function ContactForm() {
@@ -35,21 +36,51 @@ export default function ContactForm() {
             message: message,
         }
 
+        Swal.fire({
+            title: 'Please Wait !',
+            html: 'Sending Message', // add html attribute if you want or remove
+            allowOutsideClick: false,
+            showCloseButton: false,
+            showCancelButton: false,
+            showConfirmButton: false,
+            onBeforeOpen: () => {
+                Swal.showLoading()
+            },
+        })
+
         setTimeout(() => {
-            setStatus('complete')
+            Swal.close()
+
+            // Success test
+            // setName('')
+            // setEmail('')
+            // setMessage('')
+            // setStatus('complete')
+            // Swal.fire('Success!', 'The message has been sent.', 'success')
+
+            // Error test
+            setStatus('error')
+            Swal.fire("We couldn't send the message!", 'Please try again later.', 'error')
         }, 5000)
 
         // axios
         //     .post('http://localhost:3001/contact/postContactForm', request)
         //     .then((res) => {
+        //         Swal.close()
         //         if (res.request.statusText == 'OK') {
+        //             setName('')
+        //             setEmail('')
+        //             setMessage('')
         //             setStatus('complete')
+        //             Swal.fire('Success!', 'The message has been sent.', 'success')
         //         } else if (res.request.statusText == 'INTERNAL_SERVER_ERROR') {
         //             setStatus('error')
+        //             Swal.fire("We couldn't send the message!", 'Please try again later.', 'error')
         //         }
         //     })
         //     .catch((err) => {
-        //         setStatus('error')
+        //         Swal.close()
+        //         Swal.fire("We couldn't send the message!", 'Please try again later.', 'error')
         //     })
     }
 
@@ -63,6 +94,7 @@ export default function ContactForm() {
                 placeholder="Full Name:"
                 type="text"
                 name="name"
+                value={name}
             />
 
             <input
@@ -72,6 +104,7 @@ export default function ContactForm() {
                 placeholder="Email:"
                 type="text"
                 name="email"
+                value={email}
             />
 
             <textarea
@@ -83,6 +116,7 @@ export default function ContactForm() {
                 rows="4"
                 cols="50"
                 placeholder="Message:"
+                value={message}
             ></textarea>
 
             {status === 'error' ? <p className={styles['error']}>{alertMessage}</p> : null}
@@ -96,9 +130,9 @@ export default function ContactForm() {
                         : ''
                 }`}
                 type="submit"
-                disabled={status === 'sending' || status === 'complete' ? true : false}
+                disabled={status === 'sending' ? true : false}
             >
-                {status === 'sending' ? 'Sending...' : status === 'complete' ? 'Sent!' : 'Submit'}
+                Submit
             </button>
         </form>
     )

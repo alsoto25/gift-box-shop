@@ -45,7 +45,7 @@
 
     input {
         background-color: $dark-gray;
-        color: $inactive-gray;
+        color: $white;
         width: 100%;
         margin: 20px auto;
         padding: 10px;
@@ -69,7 +69,7 @@
         background-color: $dark-gray;
         font-family: $serif-font-family;
         font-size: 16px;
-        color: $inactive-gray;
+        color: $white;
         font-size: 1.1rem;
         text-align: start;
         max-width: 100%;
@@ -113,29 +113,11 @@
         }
     }
 
-    &-sending {
+    &:disabled {
         color: $inactive-gray-light;
         background-color: $inactive-gray;
         border: 3px solid $inactive-gray;
     }
-
-    &-complete {
-        color: $inactive-gray-light;
-        background-color: $inactive-gray;
-        border: 3px solid $inactive-gray;
-    }
-}
-
-.contact-form-submit-sending:disabled {
-    color: $inactive-gray-light;
-    background-color: $inactive-gray;
-    border: 3px solid $inactive-gray;
-}
-
-.contact-form-submit-complete:disabled {
-    color: $dark-brown;
-    background-color: $inactive-success;
-    border: 3px solid $inactive-success;
 }
 
 .left-column {

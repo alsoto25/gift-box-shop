@@ -83,10 +83,14 @@
 /* Base styling */
 html,
 body,
-#__next {
+#__next,
+html.swal2-shown.swal2-height-auto,
+body.swal2-shown.swal2-height-auto,
+#__next.swal2-shown.swal2-height-auto {
     padding: 0;
     margin: 0;
-    height: 100%;
+    height: 100% !important;
+    min-height: 100%;
 
     font-family: $serif-font;
 }
