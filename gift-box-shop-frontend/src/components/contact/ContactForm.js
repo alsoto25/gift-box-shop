@@ -52,15 +52,15 @@ export default function ContactForm() {
             Swal.close()
 
             // Success test
-            // setName('')
-            // setEmail('')
-            // setMessage('')
-            // setStatus('complete')
-            // Swal.fire('Success!', 'The message has been sent.', 'success')
+            setName('')
+            setEmail('')
+            setMessage('')
+            setStatus('complete')
+            Swal.fire('Success!', 'The message has been sent.', 'success')
 
             // Error test
-            setStatus('error')
-            Swal.fire("We couldn't send the message!", 'Please try again later.', 'error')
+            //setStatus('error')
+            //Swal.fire("We couldn't send the message!", 'Please try again later.', 'error')
         }, 5000)
 
         // axios
