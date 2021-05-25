@@ -26,7 +26,7 @@ export default function Checkout({ isActive }) {
     const handleSubmit = (e) => {
         e.preventDefault()
 
-        const obj = {
+        const order = {
             userChoices,
             'personal-info': {
                 nameFrom,
@@ -43,9 +43,9 @@ export default function Checkout({ isActive }) {
         }
 
         axios
-            .post('http://localhost:3001/shopSteps/processPayment', obj)
+            .post('http://localhost:3001/shopSteps/processPayment', order)
             .then((res) => {
-                if (res.request.statusText == 'OK') {
+                if (res.request.statusText == 'NO_CONTENT') {
                     Swal.fire('Success!', 'The order has been placed.', 'success')
                 } else if (res.request.statusText == 'INTERNAL_SERVER_ERROR') {
                     Swal.fire(
@@ -101,7 +101,7 @@ export default function Checkout({ isActive }) {
                         placeholder="Email"
                         value={email}
                         required
-                        onChange={(e) => setEmail(e.value)}
+                        onChange={(e) => {setEmail(e.value); console.log(e.value);}}
                     />
                 </div>
                 <div className={`${styles['input-container']}`}>
