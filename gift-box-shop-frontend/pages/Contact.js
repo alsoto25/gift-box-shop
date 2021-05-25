@@ -6,24 +6,7 @@ import PageWrapper from '../src/components/global/PageWrapper'
 import styles from '../styles/pages/Contact.module.scss'
 
 export default function Contact() {
-    const [contact, setContact] = useState({})
-
-    useEffect(() => {
-        //Fetch/Axios Request API
-        axios
-            .get('http://localhost:3001/contact/getContactInfo')
-            .then((res) => {
-                console.log('RES', res)
-                if (res.request.statusText == 'OK') {
-                    setContact(res.data.contactResponse)
-                } else if (res.request.statusText == 'INTERNAL_SERVER_ERROR') {
-                    // console.log('ERROR',res)
-                }
-            })
-            .catch((err) => {
-                // console.log(err)
-            })
-    }, [])
+    const [contact, error] = useGetData('http://localhost:3001/contact/getContactInfo')
 
     return (
         <PageWrapper>

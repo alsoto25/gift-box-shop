@@ -11,6 +11,7 @@ import homeResponse from '../test/homeResponse'
 
 export default function Home() {
     const [content, setContent] = useState(null)
+    // const [content, error] = useGetData('http://localhost:3001/about/getHomeInfo')
 
     useEffect(() => {
         setContent(homeResponse)

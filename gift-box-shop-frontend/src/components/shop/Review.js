@@ -1,36 +1,15 @@
 import React, { useRef } from 'react'
-import { contactResponse } from '../../../test/contactResponse'
+// import { contactResponse } from '../../../test/contactResponse'
 import styles from '../../../styles/components/shop/Review.module.scss'
-import Swal from 'sweetalert2'
+import { useShopReducer } from '../../utils'
 
-export default function Review({ isActive, userChoices, steps, basePrice, stepsList }) {
+export default function Review({ isActive, stepsData }) {
+    const [{ userChoices, stepsList }, dispatch] = useShopReducer()
     let total = useRef(0)
-    total.current = basePrice
+    total.current = stepsData.basePrice
 
     function handleClick() {
-        console.log(userChoices)
-        Swal.fire({
-            title: 'Processing request',
-            html: 'Loading...',
-            timer: 2000,
-            timerProgressBar: true,
-            didOpen: () => {
-                Swal.showLoading()
-            },
-            willClose: () => {},
-        }).then((result) => {
-            if (result.dismiss === Swal.DismissReason.timer) {
-                Swal.fire({
-                    position: 'center',
-                    icon: 'success',
-                    title: 'Successful Request',
-                    showConfirmButton: true,
-                })
-                setTimeout(() => {
-                    window.location.reload(true)
-                }, 3000)
-            }
-        })
+        dispatch({ type: 'SET_CURRENT_STEP', data: 'checkout' })
     }
     return (
         <>
@@ -47,18 +26,18 @@ export default function Review({ isActive, userChoices, steps, basePrice, stepsL
                                     'https://cdn.shopify.com/s/files/1/0063/5942/products/Rose_Gold_with_Gold_Foil_Beau_Bella_2000x.jpg?v=1591294565'
                                 }
                             />
-                            <p>{contactResponse.info}</p>
+                            <p>Response</p>
                         </aside>
                     )}
                     <aside>
                         {isActive && <h1>Review</h1>}
                         <section className={`${styles['borderBox']} ${styles['borderBox-top']}`}>
                             <h3>Gift Box Base</h3>
-                            <h3>${basePrice}</h3>
+                            <h3>${stepsData.basePrice}</h3>
                         </section>
 
                         <div>
-                            {steps.map((step, index) => {
+                            {stepsData.steps.map((step, index) => {
                                 if (
                                     stepsList.find(
                                         (stp) => stp.id === step.id && step.id !== 'review-step',

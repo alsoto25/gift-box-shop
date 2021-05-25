@@ -1,33 +1,14 @@
 import React, { useState, useEffect } from 'react'
 import PageWrapper from '../src/components/global/PageWrapper'
 import styles from '../styles/pages/About.module.scss'
+import { useGetData } from '../src/utils'
 import axios from 'axios'
 
 // Testing imports
 import { aboutResponse } from '../test/aboutResponse'
 
 export default function AboutMe() {
-    const [about, setAbout] = useState({})
-
-    useEffect(() => {
-        //Fetch/Axios Request API
-        axios
-            .get('http://localhost:3001/about/getAboutInfo')
-            .then((res) => {
-                console.log('RES', res)
-                if (res.request.statusText == 'OK') {
-                    setAbout(res.data.aboutResponse)
-                } else if (res.request.statusText == 'INTERNAL_SERVER_ERROR') {
-                    console.log('ERROR', res)
-                }
-            })
-            .catch((err) => {
-                console.log(err)
-            })
-    }, [])
-
-    console.log(about)
-    //setAbout(objetoPrueba);
+    const [about, error] = useGetData('http://localhost:3001/about/getAboutInfo')
 
     return (
         <PageWrapper>

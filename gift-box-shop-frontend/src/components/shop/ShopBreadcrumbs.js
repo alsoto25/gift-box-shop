@@ -1,5 +1,6 @@
 import styles from '../../../styles/components/shop/ShopBreadcrumbs.module.scss'
 import Swal from 'sweetalert2'
+import { useShopReducer } from '../../utils'
 
 const Toast = Swal.mixin({
     toast: true,
@@ -13,11 +14,12 @@ const Toast = Swal.mixin({
     },
 })
 
-export default function ShopBreadcrumbs({ stepsList, currentStep, setCurrentStep }) {
+export default function ShopBreadcrumbs() {
+    const [{ stepsList, currentStep }, dispatch] = useShopReducer()
+
     function handleClick(option, index) {
-        console.clear()
         stepsList.find((step, i) => step.id === currentStep && index <= i)
-            ? setCurrentStep(option)
+            ? dispatch({ type: 'SET_CURRENT_STEP', data: option })
             : Toast.fire({
                   icon: 'error',
                   title: 'Please Click on Continue',
