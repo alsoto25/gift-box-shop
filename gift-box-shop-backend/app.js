@@ -16,7 +16,6 @@ var homeController = require('./routes/homeController');
 var aboutController = require('./routes/aboutController');
 var contactController = require('./routes/contactController');
 var shopStepsController = require('./routes/shopStepsController');
-var startPaymentController = require('./routes/startPaymentController');
 
 var app = express();
 
@@ -38,7 +37,6 @@ app.use('/home', homeController);
 app.use('/about', aboutController);
 app.use('/contact', contactController);
 app.use('/shopSteps', shopStepsController);
-app.use('/startPayment', startPaymentController);
 
 // error handler
 app.use(function (err, req, res, next) {
