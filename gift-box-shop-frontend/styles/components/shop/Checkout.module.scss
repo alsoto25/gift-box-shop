@@ -1,0 +1,201 @@
+@import '../../utils.scss';
+
+.checkout {
+    @include flex-direction(column);
+
+    width: 100%;
+    display: none;
+    padding: 10px 15px;
+    border-radius: 20px;
+    background: $white;
+
+    @include respond-to('small') {
+        @include flex-direction(row);
+
+        padding: 30px 15px;
+    }
+}
+
+.checkout-active {
+    @include flexbox;
+}
+
+.checkout-wrapper {
+    @include flex-grow(1);
+
+    border: 0;
+}
+
+.info-container {
+    padding: 15px;
+    margin-bottom: 20px;
+    border-bottom: 1px solid $inactive-gray-light;
+
+    @include respond-to('small') {
+        @include flex-basis(65%);
+
+        padding-bottom: 0;
+        margin-bottom: 0;
+        border-right: 1px solid $inactive-gray-light;
+        border-bottom: 0;
+    }
+}
+
+.buttons-container {
+    @include flexbox;
+    @include flex-direction(column);
+    @include justify-content(center);
+    @include align-items(center);
+
+    @include respond-to('small') {
+        @include flex-basis(300px);
+    }
+}
+
+.divider {
+    position: relative;
+    width: 80%;
+    margin: 15px 0;
+
+    hr {
+        width: 100%;
+        height: 1px;
+        border: none;
+
+        background-color: $inactive-gray-light;
+    }
+
+    span {
+        color: $inactive-gray;
+        padding: 2px 10px;
+        background-color: $white;
+    }
+}
+
+.divider--hidden-small {
+    display: none;
+
+    @include respond-to('small') {
+        display: block;
+    }
+}
+
+.divider-text--title {
+    top: 50%;
+    position: absolute;
+    @include transform(translateY(-60%));
+
+    font-size: 18px;
+}
+
+.divider-text--centered {
+    top: 50%;
+    left: 50%;
+    position: absolute;
+    @include transform(translate(-50%, -60%));
+}
+
+.input-container {
+    margin: 20px 0;
+
+    &:not(:last-child) {
+        margin-bottom: 50px;
+    }
+}
+
+.input-row {
+    width: 100%;
+
+    @include flexbox;
+    @include flex-direction(column);
+    @include justify-content(space-between);
+
+    @include respond-to('small') {
+        @include flex-direction(row);
+    }
+}
+
+.input {
+    @include flex-grow(1);
+
+    padding: 10px 15px;
+    border: 1px solid $inactive-gray-light;
+    margin-bottom: 10px;
+
+    font-size: 16px;
+    font-family: $serif-font-family;
+
+    &:not(:last-child) {
+        margin-bottom: 10px;
+    }
+
+    @include respond-to('small') {
+        &:not(:last-child) {
+            margin-right: 10px;
+        }
+    }
+}
+
+.input-date {
+    @include flex-direction(row !important);
+}
+
+.button {
+    @include flexbox;
+    @include flex-basis(50%);
+    @include justify-content(center);
+
+    position: relative;
+    width: 100%;
+    max-width: 300px;
+
+    padding: 15px 25px;
+    border: none;
+    border-radius: 5px;
+    margin: 15px;
+
+    font-size: 16px;
+    font-family: $serif-font-family;
+    font-weight: $medium-fw;
+    cursor: pointer;
+    transition: all 0.3s;
+
+    @include respond-to('small') {
+        @include flex-basis(0);
+
+        margin: 0;
+    }
+}
+
+.button-green {
+    color: $white;
+    background-color: $aqua;
+
+    &:hover {
+        background-color: $dark-aqua;
+    }
+}
+
+.button-img {
+    margin-right: 10px;
+}
+
+.button-paypal {
+    padding: 50px 0 0;
+    overflow: hidden;
+
+    background-color: $inactive-gray-light;
+
+    &:hover img {
+        @include transform(translate(-50%, -50%) scale(0.215));
+    }
+}
+
+.button-img-paypal {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    @include transform(translate(-50%, -50%) scale(0.2));
+
+    transition: all 0.3s;
+}

@@ -83,10 +83,14 @@
 /* Base styling */
 html,
 body,
-#__next {
+#__next,
+html.swal2-shown.swal2-height-auto,
+body.swal2-shown.swal2-height-auto,
+#__next.swal2-shown.swal2-height-auto {
     padding: 0;
     margin: 0;
-    height: 100%;
+    height: 100% !important;
+    min-height: 100%;
 
     font-family: $serif-font;
 }
@@ -129,8 +133,19 @@ main {
     width: 100%;
     max-width: 1600px;
     display: block;
-    padding: 20px 7.5vw;
     margin: 0 auto;
+}
+
+.main-content-margin {
+    margin: 20px 7.5vw;
+
+    @include respond-to('small') {
+        margin: 20px 5vw;
+    }
+}
+
+.main-content-padding {
+    padding: 20px 7.5vw;
 
     @include respond-to('small') {
         padding: 20px 5vw;

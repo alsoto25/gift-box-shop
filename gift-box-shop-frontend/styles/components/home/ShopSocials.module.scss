@@ -1,0 +1,57 @@
+@import '../../utils.scss';
+
+.shop-socials-container {
+    @include flexbox;
+    @include flex-direction(column);
+    @include align-items(center);
+
+    padding: 30px 0;
+}
+
+.link {
+    margin-bottom: 50px;
+    padding: 15px 50px;
+    border: 3px solid $white;
+    border-radius: 50px;
+
+    color: $white;
+    font-size: 18px;
+    font-family: $serif-font-family;
+    font-weight: $medium-fw;
+    letter-spacing: 5px;
+    text-transform: uppercase;
+    text-align: center;
+
+    transition: all 0.3s;
+
+    &:hover {
+        font-weight: $bold-fw;
+        color: $dark-brown;
+        background-color: $white;
+    }
+}
+
+.socials-wrapper {
+    @include flexbox;
+    @include justify-content(space-around);
+
+    width: 100%;
+    max-width: 1000px;
+    margin: 25px auto;
+}
+
+.social-link {
+    img {
+        width: 50px;
+        height: auto;
+
+        filter: invert(1);
+        transition: all 0.3s;
+    }
+
+    &:hover {
+        img {
+            @include transform(scale(1.2));
+        }
+    }
+}

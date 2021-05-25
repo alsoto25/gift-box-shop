@@ -8,6 +8,7 @@ export default function PageWrapper({ children }) {
             <Head>
                 <title>Repasa Giftbox</title>
                 <link rel="icon" href="/favicon.ico" />
+                <script src="https://js.stripe.com/v3/"></script>
             </Head>
 
             <Header />

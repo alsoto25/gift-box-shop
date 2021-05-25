@@ -1,6 +1,7 @@
 import React, { useState } from 'react'
 import styles from '../../../styles/components/shop/DynamicStep.module.scss'
 import Swal from 'sweetalert2'
+import { useShopReducer } from '../../utils'
 
 const Toast = Swal.mixin({
     toast: true,
@@ -14,13 +15,15 @@ const Toast = Swal.mixin({
     },
 })
 
-function DynamicDropdown({ dropdown, userChoices, handleChange }) {
+function DynamicDropdown({ dropdown, handleChange }) {
+    const [{ userChoices }] = useShopReducer()
+
     return (
         <select
             name={dropdown.id}
             onChange={handleChange}
             disabled={dropdown.dependencyId && !userChoices[dropdown.dependencyId]}
-            value={userChoices[dropdown.id] ? userChoices[dropdown.id] : null}
+            value={userChoices[dropdown.id] ? userChoices[dropdown.id] : ''}
         >
             {dropdown.options.map((option) => {
                 if (
@@ -36,7 +39,6 @@ function DynamicDropdown({ dropdown, userChoices, handleChange }) {
                     <option
                         value={option.id === 'default' ? '' : option.id}
                         disabled={option.disabled}
-                        selected={option.selected}
                         key={option.id}
                     >
                         {option.title}
@@ -61,7 +63,7 @@ function DynamicSuboption({ suboptionData, setCurrentSuboption }) {
     return (
         <>
             {!suboptions && suboptionData.fileUploader ? (
-                <label for="file-upload" className={styles['upload']}>
+                <label htmlFor="file-upload" className={styles['upload']}>
                     <input
                         type="file"
                         id="file-upload"
@@ -82,7 +84,7 @@ function DynamicSuboption({ suboptionData, setCurrentSuboption }) {
                     <h2>{suboptions.name}</h2>
                     <div>
                         {suboptions.options.map((option) => (
-                            <label for={option.name} style={{ background: option.hex }}>
+                            <label htmlFor={option.name} style={{ background: option.hex }}>
                                 <input
                                     type="radio"
                                     name={suboptionData.id}
@@ -103,55 +105,92 @@ function DynamicSuboption({ suboptionData, setCurrentSuboption }) {
 function ChoicesSection({
     step,
     isActive,
-    userChoices,
-    setUserChoices,
     currentOption,
     setCurrentOption,
     setHaveSuboption,
-    stepsList,
-    currentStep,
-    setCurrentStep,
-    setStepsList,
     validateStep,
     currentSuboption,
     tempSuboption,
     setTempSuboption,
 }) {
+    const [{ userChoices, stepsList, currentStep }, dispatch] = useShopReducer()
+
+    function createChoices(choiceIndex = -1) {
+        return step.options.map((option, index) => (
+            <button
+                className={`${styles['choice-button']}${
+                    currentOption === index ? ` ${styles['choice-button-active']}` : ''
+                }`}
+                type="button"
+                key={choiceIndex === -1 ? option.id : `${option.id}-${choiceIndex}`}
+                onClick={function () {
+                    setHaveSuboption(false)
+                    setCurrentOption(index)
+                }}
+            >
+                <div className={styles['choice-button-title']}>
+                    {option.title}
+                    {choiceIndex === -1 ? '' : ` ${choiceIndex}`}
+                </div>
+                {option.dropdowns.map((dropdown) => {
+                    return (
+                        <div
+                            key={choiceIndex === -1 ? dropdown.id : `${dropdown.id}-${choiceIndex}`}
+                            className={styles['choice-button-line']}
+                        >
+                            -{' '}
+                            <span className={styles['choice-button-line-title']}>
+                                {dropdown.name}
+                            </span>
+                            :{' '}
+                            {choiceIndex === -1
+                                ? userChoices[dropdown.id]
+                                : userChoices[`${dropdown.id}-${choiceIndex}`]
+                                ? dropdown.options.find((opt) =>
+                                      choiceIndex === -1
+                                          ? userChoices[dropdown.id] === opt.id
+                                          : userChoices[`${dropdown.id}-${choiceIndex}`] === opt.id,
+                                  ).title
+                                : 'None'}
+                        </div>
+                    )
+                })}
+            </button>
+        ))
+    }
+
     function handleClick() {
-        console.clear()
         stepsList.map((step, index) => {
             if (step.id === currentStep) {
                 if (index + 1 <= stepsList.length - 1) {
                     if (validateStep(currentStep)) {
                         let newStepsList = [...stepsList]
                         newStepsList[index].isComplete = true
-                        setStepsList(newStepsList)
-                        setCurrentStep(stepsList[index + 1].id)
+                        dispatch({
+                            type: 'UPDATE_STEPS',
+                            stepsList: newStepsList,
+                            currentStep: stepsList[index + 1].id,
+                        })
                         window.scrollTo(0, 0)
-
-                        console.log(userChoices)
-                        console.log(tempSuboption)
 
                         if (tempSuboption !== {}) {
                             for (var tempKey in tempSuboption) {
                                 let copy = { ...userChoices }
-                                console.log(copy)
                                 delete copy[tempKey]
-                                console.log(copy)
-                                setUserChoices(copy)
+                                dispatch({ type: 'SET_USER_CHOICES', data: copy })
                                 break
                             }
                         }
 
                         for (var currentKey in currentSuboption) {
-                            setUserChoices({
-                                ...userChoices,
-                                [currentKey]: currentSuboption[currentKey],
+                            dispatch({
+                                type: 'UPDATE_USER_CHOICES',
+                                choice: currentKey,
+                                data: currentSuboption[currentKey],
                             })
                             setTempSuboption({ ...currentSuboption })
                             break
                         }
-                        console.log(userChoices)
                     } else {
                         Toast.fire({
                             icon: 'error',
@@ -175,39 +214,7 @@ function ChoicesSection({
             }`}
         >
             <div className={styles['choices-title']}>{step.title}</div>
-            <div className={styles['choices-button-container']}>
-                {step.options.map((option, index) => (
-                    <button
-                        className={`${styles['choice-button']}${
-                            currentOption === index ? ` ${styles['choice-button-active']}` : ''
-                        }`}
-                        type="button"
-                        onClick={function () {
-                            setHaveSuboption(false)
-                            setCurrentOption(index)
-                        }}
-                    >
-                        <div className={styles['choice-button-title']}>{option.title}</div>
-                        {option.dropdowns.map((dropdown) => {
-                            //console.log(dropdown)
-                            return (
-                                <div className={styles['choice-button-line']}>
-                                    -{' '}
-                                    <span className={styles['choice-button-line-title']}>
-                                        {dropdown.name}
-                                    </span>
-                                    :{' '}
-                                    {userChoices[dropdown.id]
-                                        ? dropdown.options.find(
-                                              (opt) => userChoices[dropdown.id] === opt.id,
-                                          ).title
-                                        : 'None'}
-                                </div>
-                            )
-                        })}
-                    </button>
-                ))}
-            </div>
+            <div className={styles['choices-button-container']}>{createChoices()}</div>
             <button className={styles['choice-next-button']} type="button" onClick={handleClick}>
                 Continue
             </button>
@@ -215,18 +222,9 @@ function ChoicesSection({
     )
 }
 
-export default function DynamicStep({
-    step,
-    isActive,
-    userChoices,
-    setUserChoices,
-    stepsList,
-    currentStep,
-    setCurrentStep,
-    setStepsList,
-    validateStep,
-}) {
+export default function DynamicStep({ step, isActive, validateStep }) {
     //tempSuboption validar borrar subOption cuando cambie
+    const [{ userChoices }, dispatch] = useShopReducer()
     const [currentOption, setCurrentOption] = useState(0)
     const [currentSuboption, setCurrentSuboption] = useState({})
     const [tempSuboption, setTempSuboption] = useState({})
@@ -245,10 +243,13 @@ export default function DynamicStep({
             suboptionData ? setHaveSuboption(true) : setHaveSuboption(false)
         }
 
-        setUserChoices({
-            ...userChoices,
-            [e.target.name]: e.target.value,
-            steps,
+        dispatch({
+            type: 'SET_USER_CHOICES',
+            data: {
+                ...userChoices,
+                [e.target.name]: e.target.value,
+                steps,
+            },
         })
     }
 
@@ -269,7 +270,6 @@ export default function DynamicStep({
                             <DynamicDropdown
                                 key={dropdown.id}
                                 dropdown={dropdown}
-                                userChoices={userChoices}
                                 handleChange={function (e) {
                                     handleChange(e, dropdown)
                                 }}
@@ -287,13 +287,7 @@ export default function DynamicStep({
             <ChoicesSection
                 step={step}
                 isActive={isActive}
-                stepsList={stepsList}
-                setStepsList={setStepsList}
                 validateStep={validateStep}
-                userChoices={userChoices}
-                setUserChoices={setUserChoices}
-                currentStep={currentStep}
-                setCurrentStep={setCurrentStep}
                 currentOption={currentOption}
                 setHaveSuboption={setHaveSuboption}
                 currentSuboption={currentSuboption}

@@ -5,55 +5,45 @@ import PageWrapper from '../src/components/global/PageWrapper'
 import ShopBreadcrumbs from '../src/components/shop/ShopBreadcrumbs'
 import DynamicStep from '../src/components/shop/DynamicStep'
 import Review from '../src/components/shop/Review'
+import Checkout from '../src/components/shop/Checkout'
 
 // Testing imports
 import { stepsResponse } from '../test/shopStepsResponse'
-import axios from "axios";
+import { useGetData, useShopReducer, ShopProvider } from '../src/utils'
 
-export default function Shop() {
-    const [currentStep, setCurrentStep] = useState('')
-    const [stepsData, setStepsData] = useState({ steps: [] })
-    const [userChoices, setUserChoices] = useState({ steps: [] })
-    const [stepsList, setStepsList] = useState([])
-    const [loading, setLoading] = useState(true)
-
-    useEffect(() => {
-        //Fetch/Axios Request API
-        axios.get('http://localhost:3001/shopSteps/getStepsInfo')
-            .then(res => {
-                console.log('RES',res);
-                if(res.request.statusText=="OK"){
-                    setStepsData(res.data.stepsResponse)
-                }
-                else if(res.request.statusText=="INTERNAL_SERVER_ERROR"){
-                    console.log('ERROR',res)
-                }
-            })
-            .catch(err => {
-                console.log(err)
-            })
-    }, [])
+const ShopContent = () => {
+    const [stepsData, error] = useGetData('http://localhost:3001/shopSteps/getStepsInfo', {
+        steps: [],
+    })
+    const [{ currentStep, userChoices, stepsList }, dispatch] = useShopReducer()
 
     useEffect(() => {
         if (stepsData.steps.length) {
             const initialStep = stepsData.steps.find((step) => step.isInitial)
 
-            setLoading(false)
-            setCurrentStep(initialStep.id)
-            setStepsList([
-                {
-                    id: initialStep.id,
-                    title: initialStep.title,
-                    isComplete: false,
-                },
-            ])
+            dispatch({
+                type: 'SET_INITIAL_STATE',
+                currentStep: initialStep.id,
+                stepsList: [
+                    {
+                        id: initialStep.id,
+                        title: initialStep.title,
+                        isComplete: false,
+                        options: initialStep.options,
+                        isInitial: initialStep.isInitial,
+                        isDefault: initialStep.isDefault,
+                        isReview: initialStep.isReview,
+                    },
+                ],
+            })
         }
     }, [stepsData.steps.length])
 
     useEffect(() => {
         if (userChoices.steps.length) {
-            setStepsList(
-                stepsData.steps.reduce((acc, step) => {
+            dispatch({
+                type: 'SET_STEPS_LIST',
+                data: stepsData.steps.reduce((acc, step) => {
                     const userStep = userChoices.steps.find((userStep) => userStep.id === step.id)
                     if (step.isInitial || step.isDefault || userStep) {
                         return [
@@ -63,13 +53,18 @@ export default function Shop() {
                                 title: step.title,
                                 isComplete: false,
                                 amount: userStep && userStep.amount ? userStep.amount : -1,
+                                options: step.options,
+                                isInitial: step.isInitial,
+                                isDefault: step.isDefault,
+                                isReview: step.isReview,
+                                isCheckout: false,
                             },
                         ]
                     }
 
                     return acc
                 }, []),
-            )
+            })
         }
     }, [stepsData.steps.length, userChoices.steps.length])
 
@@ -90,50 +85,50 @@ export default function Shop() {
     }
 
     return (
-        <PageWrapper>
-            {!loading && (
+        <>
+            {error && <div>Error!</div>}
+            {!error && (
                 <div className={styles['shop-container']}>
                     <div className={styles['left-column']}>
-                        <ShopBreadcrumbs
-                            stepsList={stepsList}
-                            currentStep={currentStep}
-                            setCurrentStep={setCurrentStep}
-                        />
-                        {stepsData.steps.map((step) =>
+                        <ShopBreadcrumbs />
+                        {stepsList.map((step) =>
                             step.isReview ? (
                                 <Review
                                     isActive={currentStep === step.id}
-                                    userChoices={userChoices}
-                                    steps={stepsData.steps}
-                                    basePrice={stepsData.basePrice}
-                                    stepsList={stepsList}
+                                    stepsData={stepsData}
                                     key={step.id}
                                 />
                             ) : null,
                         )}
                     </div>
                     <div className={styles['right-column']}>
-                        {stepsData
-                            ? stepsData.steps.map((step) =>
+                        {stepsList
+                            ? stepsList.map((step) =>
                                   step.isReview ? null : (
                                       <DynamicStep
                                           key={step.id + 2}
                                           step={step}
                                           isActive={currentStep === step.id}
-                                          userChoices={userChoices}
-                                          setUserChoices={setUserChoices}
-                                          stepsList={stepsList}
-                                          currentStep={currentStep}
-                                          setCurrentStep={setCurrentStep}
-                                          setStepsList={setStepsList}
                                           validateStep={validateStep}
                                       />
                                   ),
                               )
-                            : 'Hi Stranger! we do not have data!'}
+                            : null}
+
+                        <Checkout isActive={currentStep === 'checkout'} />
                     </div>
                 </div>
             )}
+        </>
+    )
+}
+
+export default function Shop() {
+    return (
+        <PageWrapper>
+            <ShopProvider>
+                <ShopContent />
+            </ShopProvider>
         </PageWrapper>
     )
 }
