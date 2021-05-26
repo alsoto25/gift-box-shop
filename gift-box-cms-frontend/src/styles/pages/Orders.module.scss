@@ -1,0 +1,88 @@
+@import "../utils.scss";
+
+.orderContainer {
+  width: 95vw;
+  min-height: 80vh;
+  margin: 2vh auto;
+  @include flexbox;
+  @include flex-direction(row);
+  @include justify-content(center);
+  @include align-items(center);
+  @include flex-wrap(wrap);
+  overflow: auto;
+}
+.order {
+  min-width: 20vw;
+  min-height: 50vh;
+  margin: 1.5em;
+  background: white;
+  text-align: center;
+  color: black;
+
+  & > div {
+    border: 2px dashed $gray !important;
+    @include flexbox;
+    @include flex-direction(column);
+    @include align-items(center);
+    p,
+    h3,
+    h4 {
+      padding: 0px;
+      margin: 0px;
+      display: inline;
+    }
+    padding: 1em 0.2em;
+    margin: 0.3em;
+  }
+}
+
+.personal {
+  @include justify-content(space-around);
+  height: 15vh;
+
+  &::before {
+    content: "User info";
+    position: relative !important;
+    margin-left: -70% !important;
+    font-weight: 600;
+    text-decoration: underline;
+  }
+}
+
+.delivery {
+  @include justify-content(space-between);
+  height: 30vh;
+  p:nth-child(4),
+  p:nth-child(5) {
+    max-width: 20vw;
+    text-overflow: ellipsis;
+    overflow: auto;
+    padding: 1em;
+  }
+
+  &::before {
+    content: "Delivery info";
+    position: relative !important;
+    margin-left: -70% !important;
+    font-weight: 600;
+    text-decoration: underline;
+  }
+}
+
+.choice {
+  @include justify-content(space-between);
+  height: 45vh;
+  div,
+  span {
+    padding: 0px;
+    margin: 0.3em auto;
+  }
+
+  &::before {
+    content: "Choices info";
+    position: relative !important;
+    margin-left: -70% !important;
+    font-weight: 600;
+    text-decoration: underline;
+  }
+}

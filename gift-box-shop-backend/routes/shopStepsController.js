@@ -28,20 +28,39 @@ router.post('/setStepsInfo', (req, res,next) => {
 });
 
 router.post('/processPayment', (req, res,next) => {
-    console.log('AAAAAA',req.body)
-    db.ref('orders').push(req.body, (snapshot) => {
-        console.log(snapshot)
-        if(snapshot != null) {
-            res.status(HttpStatus.OK).json({success: true});
+    db.ref('orders').once('value', (snapshot) => {
+        var data = snapshot.val();
+        if(data){
+            data.push(req.body);
+              db.ref('orders').set(data, (snapshot) => {
+            console.log(snapshot)
+            if(snapshot != null) {
+                res.status(HttpStatus.OK).json({success: true});
+            }
+            else {
+                res.status(HttpStatus.INTERNAL_SERVER_ERROR).json({ err: 'Orden fallida' });
+            }
+        })
+            .catch( err => {
+                res.status(HttpStatus.INTERNAL_SERVER_ERROR).json({ err: err });
+            });
+        }else{
+            db.ref('orders').set([req.body], (snapshot) => {
+            console.log(snapshot)
+            if(snapshot != null) {
+                res.status(HttpStatus.OK).json({success: true});
+            }
+            else {
+                res.status(HttpStatus.INTERNAL_SERVER_ERROR).json({ err: 'Orden fallida' });
+            }
+        })
+            .catch( err => {
+                res.status(HttpStatus.INTERNAL_SERVER_ERROR).json({ err: err });
+            });
         }
-        else {
-            res.status(HttpStatus.INTERNAL_SERVER_ERROR).json({ err: 'Orden fallida' });
-        }
+        
+      
     })
-    .catch( err => {
-        res.status(HttpStatus.INTERNAL_SERVER_ERROR).json({ err: err });
-    });
-
 });
 
 router.get('/getOrders', (req, res,next) => {

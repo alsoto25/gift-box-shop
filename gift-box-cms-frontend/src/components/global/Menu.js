@@ -12,10 +12,10 @@ const menuItems = [
     text: "Orders",
     url: "/Orders",
   },
-  {
-    text: "Content",
-    url: "/Content",
-  },
+  //   {
+  //     text: "Content",
+  //     url: "/Content",
+  //   },
   {
     text: "Contact",
     url: "/Contact",
@@ -67,10 +67,15 @@ const MenuElements = ({ open }) => {
         </Link>
       ))}
 
-      <Link key="signout" to="/" className={`${styles.link} ${router.pathname === "/" ? styles["link-active"] : ""}`}> 
-      Sign Out 
-      </Link>   
-
+      <Link
+        key="signout"
+        to="/"
+        className={`${styles.link} ${
+          router.pathname === "/" ? styles["link-active"] : ""
+        }`}
+      >
+        Sign Out
+      </Link>
     </div>
   );
 };
