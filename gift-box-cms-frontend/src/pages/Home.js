@@ -180,14 +180,14 @@ export default function Home() {
 
   }
 
-   const settings = {
+  const settings = {
     dots: true,
     arrows: true,
     infinite: true,
     speed: 500,
     slidesToShow: 1,
     slidesToScroll: 1,
-    className: styles['slides'],
+    className: styles["slides"],
     fade: true,
   };
 

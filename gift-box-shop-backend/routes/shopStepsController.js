@@ -10,15 +10,67 @@ router.get('/getStepsInfo', (req, res,next) => {
     db.ref('steps').once('value', (snapshot) => {
         const data = snapshot.val();
         res.status(HttpStatus.OK).json({ stepsResponse: data });
+    })
+    .catch( err => {
+        res.status(HttpStatus.INTERNAL_SERVER_ERROR).json({ err: err });
     });
 });
 
 router.post('/setStepsInfo', (req, res,next) => {
-    db.ref('steps').set('req.body', (snapshot) => {
+    db.ref('steps').set(req.body, (snapshot) => {
         console.log(snapshot)
         res.status(HttpStatus.NO_CONTENT).json();
+    })
+    .catch( err => {
+        res.status(HttpStatus.INTERNAL_SERVER_ERROR).json({ err: err });
     });
 
+});
+
+router.post('/processPayment', (req, res,next) => {
+    db.ref('orders').once('value', (snapshot) => {
+        var data = snapshot.val();
+        if(data){
+            data.push(req.body);
+              db.ref('orders').set(data, (snapshot) => {
+            console.log(snapshot)
+            if(snapshot != null) {
+                res.status(HttpStatus.OK).json({success: true});
+            }
+            else {
+                res.status(HttpStatus.INTERNAL_SERVER_ERROR).json({ err: 'Orden fallida' });
+            }
+        })
+            .catch( err => {
+                res.status(HttpStatus.INTERNAL_SERVER_ERROR).json({ err: err });
+            });
+        }else{
+            db.ref('orders').set([req.body], (snapshot) => {
+            console.log(snapshot)
+            if(snapshot != null) {
+                res.status(HttpStatus.OK).json({success: true});
+            }
+            else {
+                res.status(HttpStatus.INTERNAL_SERVER_ERROR).json({ err: 'Orden fallida' });
+            }
+        })
+            .catch( err => {
+                res.status(HttpStatus.INTERNAL_SERVER_ERROR).json({ err: err });
+            });
+        }
+        
+      
+    })
+});
+
+router.get('/getOrders', (req, res,next) => {
+    db.ref('orders').once('value', (snapshot) => {
+        const data = snapshot.val();
+        res.status(HttpStatus.OK).json({ ordersResponse: data });
+    })
+        .catch( err => {
+            res.status(HttpStatus.INTERNAL_SERVER_ERROR).json({ err: err });
+        });
 });
 
 module.exports = router;

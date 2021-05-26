@@ -1,4 +1,4 @@
-@import '../utils.scss';
+@import "../utils.scss";
 
 .upload {
     position:absolute;
@@ -7,92 +7,91 @@
     z-index: 10;
     @include transform(translateX(-50%));
 
-    background-color: rgba(255, 255, 255, 0.788);
+  background-color: rgba(255, 255, 255, 0.788);
 
-    width: 17% !important;
-    padding-top: 1em;
-    height: 20%;
-    border: 2px dashed $dark-gray;
-    border-radius: 15px;
+  width: 17% !important;
+  padding-top: 1em;
+  height: 20%;
+  border: 2px dashed $dark-gray;
+  border-radius: 15px;
+  @include flexbox;
+  @include flex-direction(column);
+  @include justify-content(center);
+  @include align-items(center);
+  &:hover {
+    cursor: pointer;
+  }
+  input[type="file"] {
+    opacity: 0;
+    z-index: -1;
+    position: absolute;
+  }
+  img {
+    width: 20px;
+    height: 20px;
+  }
+  div {
+    margin-top: 0.5em;
+    padding: 0px !important;
+    width: 100%;
+    height: 40px;
     @include flexbox;
-    @include flex-direction(column);
+    @include flex-direction(row);
     @include justify-content(center);
     @include align-items(center);
-    &:hover {
-        cursor: pointer;
+    p,
+    span {
+      margin: 0px;
+      margin-top: 1em;
+      margin-right: 1em;
+      padding: 0px;
+      font-size: 0.8em;
     }
-    input[type='file'] {
-        opacity: 0;
-        z-index: -1;
-        position: absolute;
+    p {
+      width: 50%;
+      max-width: 100%;
+      max-height: 100%;
+      text-overflow: ellipsis !important;
+      overflow: hidden;
     }
-    img {
-        width: 20px;
-        height: 20px;
+    span {
+      font-weight: bold;
     }
-    div {
-        margin-top: 0.5em;
-        padding: 0px !important;
-        width: 100%;
-        height: 40px;
-        @include flexbox;
-        @include flex-direction(row);
-        @include justify-content(center);
-        @include align-items(center);
-        p,
-        span {
-            margin: 0px;
-            margin-top: 1em;
-            margin-right: 1em;
-            padding: 0px;
-            font-size: 0.8em;
-        }
-        p {
-            width: 50%;
-            max-width: 100%;
-            max-height: 100%;
-            text-overflow: ellipsis !important;
-            overflow: hidden;
-        }
-        span {
-            font-weight: bold;
-        }
-    }
+  }
 }
 
-.deleteBtn{
-    position: absolute;
-    left: 6vh;
-    top: 38vh;
-    width: 17% !important;
-    padding-top: 0.4em;
-    height: 10%;
-    border-radius: 10px;
-    font-family: $serif-font-family;
-    color:White;
-    background-color: rgb(206, 45, 45);
-    border: none;
-    font-size: 1.1rem;
+.deleteBtn {
+  position: absolute;
+  left: 6vh;
+  top: 38vh;
+  width: 17% !important;
+  padding-top: 0.4em;
+  height: 10%;
+  border-radius: 10px;
+  font-family: $serif-font-family;
+  color: White;
+  background-color: rgb(206, 45, 45);
+  border: none;
+  font-size: 1.1rem;
 
-    &:hover{
-        cursor: pointer;
-    }
-
+  &:hover {
+    cursor: pointer;
+  }
 }
 
-.saveBtn{
-    position: absolute;
-    left: 6vh;
-    top: 50.5vh;
-    width: 17% !important;
-    padding-top: 0.4em;
-    height: 10%;
-    border-radius: 10px;
-    font-family: $serif-font-family;
-    color:White;
-    background-color: rgb(40, 212, 63);
-    border: none;
-    font-size: 1.1rem;
+.saveBtn {
+  position: absolute;
+  left: 6vh;
+  top: 50.5vh;
+  width: 17% !important;
+  padding-top: 0.4em;
+  height: 10%;
+  border-radius: 10px;
+  font-family: $serif-font-family;
+  color: White;
+  background-color: rgb(40, 212, 63);
+  border: none;
+  font-size: 1.1rem;
 
     &:hover{
         cursor: pointer;

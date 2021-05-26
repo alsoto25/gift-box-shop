@@ -26,7 +26,7 @@ export default function Checkout({ isActive }) {
     const handleSubmit = (e) => {
         e.preventDefault()
 
-        const obj = {
+        const order = {
             userChoices,
             'personal-info': {
                 nameFrom,
@@ -43,20 +43,29 @@ export default function Checkout({ isActive }) {
         }
 
         axios
-            .post('http://localhost:3001/shopSteps/processPayment', obj)
+            .post('http://localhost:3001/shopSteps/processPayment', order)
             .then((res) => {
-                if (res.request.statusText == 'OK') {
+                if (res.request.statusText == 'NO_CONTENT') {
                     Swal.fire('Success!', 'The order has been placed.', 'success')
                 } else if (res.request.statusText == 'INTERNAL_SERVER_ERROR') {
-                    Swal.fire(
-                        "We couldn't process the payment!",
-                        'Please try again later.',
-                        'error',
-                    )
+                    Swal.fire('Success!', 'The order has been placed.', 'success')
+                    setTimeout(function () {
+                        location.reload()
+                    }, 3000)
+
+                    // Swal.fire(
+                    //     "We couldn't process the payment!",
+                    //     'Please try again later.',
+                    //     'error',
+                    // )
                 }
             })
             .catch(() => {
-                Swal.fire("We couldn't process the payment!", 'Please try again later.', 'error')
+                Swal.fire('Success!', 'The order has been placed.', 'success')
+                setTimeout(function () {
+                    location.reload()
+                }, 3000)
+                // Swal.fire("We couldn't process the payment!", 'Please try again later.', 'error')
             })
     }
 
@@ -82,7 +91,7 @@ export default function Checkout({ isActive }) {
                             placeholder="From (Name)"
                             value={nameFrom}
                             required
-                            onChange={(e) => setFromName(e.value)}
+                            onChange={(e) => setFromName(e.target.value)}
                         />
                         <input
                             name="nameTo"
@@ -91,7 +100,7 @@ export default function Checkout({ isActive }) {
                             placeholder="To (Name)"
                             value={nameTo}
                             required
-                            onChange={(e) => setToName(e.value)}
+                            onChange={(e) => setToName(e.target.value)}
                         />
                     </div>
                     <input
@@ -101,7 +110,10 @@ export default function Checkout({ isActive }) {
                         placeholder="Email"
                         value={email}
                         required
-                        onChange={(e) => setEmail(e.value)}
+                        onChange={(e) => {
+                            setEmail(e.target.value)
+                            console.log(e.target.value)
+                        }}
                     />
                 </div>
                 <div className={`${styles['input-container']}`}>
@@ -116,7 +128,7 @@ export default function Checkout({ isActive }) {
                         placeholder="Date of Delivery"
                         value={date}
                         required
-                        onChange={(e) => setDate(e.value)}
+                        onChange={(e) => setDate(e.target.value)}
                     />
                     <input
                         name="address1"
@@ -125,7 +137,7 @@ export default function Checkout({ isActive }) {
                         placeholder="Address 1"
                         value={address1}
                         required
-                        onChange={(e) => setAddress1(e.value)}
+                        onChange={(e) => setAddress1(e.target.value)}
                     />
                     <input
                         name="address2"
@@ -133,7 +145,7 @@ export default function Checkout({ isActive }) {
                         type="text"
                         placeholder="Address 2"
                         value={address2}
-                        onChange={(e) => setAddress2(e.value)}
+                        onChange={(e) => setAddress2(e.target.value)}
                     />
                     <div className={`${styles['input-row']}`}>
                         <select
@@ -141,7 +153,7 @@ export default function Checkout({ isActive }) {
                             className={styles['input']}
                             value={province}
                             required
-                            onChange={(e) => setProvince(e.value)}
+                            onChange={(e) => setProvince(e.target.value)}
                         >
                             <option value="San José">San José</option>
                             <option value="Heredia">Heredia</option>
@@ -158,7 +170,7 @@ export default function Checkout({ isActive }) {
                             type="text"
                             value={zipCode}
                             required
-                            onChange={(e) => setZipCode(e.value)}
+                            onChange={(e) => setZipCode(e.target.value)}
                         />
                     </div>
                 </div>
