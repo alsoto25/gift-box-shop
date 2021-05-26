@@ -1,0 +1,86 @@
+@import '../../utils.scss';
+
+.testimonials {
+    @include flexbox;
+    @include flex-direction(column);
+}
+
+.testimonials-title {
+    margin: 15px 0;
+
+    font: 26px $serif-font-family;
+    font-weight: $bold-fw;
+    letter-spacing: 10px;
+    text-align: center;
+    color: $dark-brown;
+}
+
+.testimonials-wrapper {
+    @include flexbox;
+    @include flex-direction(column);
+    @include justify-content(space-between);
+    @include align-items(center);
+
+    margin: auto;
+    padding: 20px;
+    max-width: 1200px;
+
+    overflow: hidden;
+
+    @include respond-to('small') {
+        @include flex-direction(row);
+        @include align-items(stretch);
+    }
+}
+
+.testimonial {
+    @include flexbox;
+    @include flex-direction(column);
+    @include align-items(center);
+
+    box-sizing: border-box;
+    -webkit-box-shadow: 5px 5px 15px 5px rgba(0, 0, 0, 0.2);
+    box-shadow: 5px 5px 15px 5px rgba(0, 0, 0, 0.2);
+
+    width: 100%;
+    max-width: 300px;
+    margin: 20px 0;
+    padding-top: 15px;
+    border-radius: 15px;
+
+    @include respond-to('small') {
+        width: 30%;
+    }
+}
+
+.testimonial-img {
+    width: 125px;
+    height: 200px;
+    border-radius: 50%;
+    object-fit: cover;
+    object-position: center;
+}
+
+.testimonial-name {
+    margin: 10px;
+    color: $dark-aqua;
+    text-align: center;
+    font: 20px $serif-font-family;
+    font-weight: $semi-bold-fw;
+    letter-spacing: 2px;
+}
+
+.testimonial-description {
+    @include flex-grow(2);
+
+    padding: 20px;
+    width: 100%;
+    border-radius: 0 0 15px 15px;
+
+    color: $white;
+    text-align: center;
+    vertical-align: middle;
+    font: 14px $serif-font-family;
+    font-weight: $regular-fw;
+    background-color: $dark-brown;
+}
