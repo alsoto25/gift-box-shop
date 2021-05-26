@@ -1,23 +1,11 @@
 @import '../utils.scss';
 
-.home-container {
-    margin-right: 2.5em;
-    margin-left: 20em;
-    margin-top: 1.2em;
-}
-
-
-.slides {
-    position: relative;
-    li button::before{
-      color: white !important;
-    } 
-}
-
 .upload {
     position:absolute;
-    left: 6vh;
-    top: 15.5vh;
+    left: 50%;
+    top: 250px;
+    z-index: 10;
+    @include transform(translateX(-50%));
 
     background-color: rgba(255, 255, 255, 0.788);
 
@@ -110,4 +98,13 @@
         cursor: pointer;
     }
 
+}
+
+.testimonials-container {
+    margin: 15px auto;
+    width: 100%;
+
+    background: $white;
+    -webkit-box-shadow: inset 5px 5px 15px -2px rgba(0, 0, 0, 0.2);
+    box-shadow: inset 5px 5px 15px -2px rgba(0, 0, 0, 0.2);
 }
