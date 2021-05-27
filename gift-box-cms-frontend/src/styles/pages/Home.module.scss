@@ -1,11 +1,11 @@
 @import "../utils.scss";
 
 .upload {
-    position:absolute;
-    left: 50%;
-    top: 250px;
-    z-index: 10;
-    @include transform(translateX(-50%));
+  position: absolute;
+  left: 50%;
+  top: 250px;
+  z-index: 10;
+  @include transform(translateX(-50%));
 
   background-color: rgba(255, 255, 255, 0.788);
 
@@ -93,17 +93,24 @@
   border: none;
   font-size: 1.1rem;
 
-    &:hover{
-        cursor: pointer;
-    }
-
+  &:hover {
+    cursor: pointer;
+  }
 }
 
 .testimonials-container {
-    margin: 15px auto;
-    width: 100%;
+  margin: 15px auto;
+  width: 100%;
 
-    background: $white;
-    -webkit-box-shadow: inset 5px 5px 15px -2px rgba(0, 0, 0, 0.2);
-    box-shadow: inset 5px 5px 15px -2px rgba(0, 0, 0, 0.2);
+  background: $white;
+  -webkit-box-shadow: inset 5px 5px 15px -2px rgba(0, 0, 0, 0.2);
+  box-shadow: inset 5px 5px 15px -2px rgba(0, 0, 0, 0.2);
+}
+
+.save {
+  background: transparent;
+  color: $white;
+  margin: 0.5em;
+  padding: 1em;
+  cursor: pointer;
 }

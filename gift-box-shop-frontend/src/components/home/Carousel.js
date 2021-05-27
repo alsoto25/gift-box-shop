@@ -5,7 +5,7 @@ import 'slick-carousel/slick/slick.css'
 import 'slick-carousel/slick/slick-theme.css'
 import styles from '../../../styles/components/home/Carousel.module.scss'
 
-export default function SliderComponent({ slides }) {
+export default function SliderComponent({ slidesList }) {
     const settings = {
         dots: false,
         arrows: false,
@@ -22,7 +22,7 @@ export default function SliderComponent({ slides }) {
     }
     return (
         <Slider {...settings}>
-            {slides.map((slide, index) => (
+            {slidesList.map((slide, index) => (
                 <div key={index}>
                     <img className={styles['slide-img']} src={slide.img.url} alt={slide.img.alt} />
                     {slide.text && (

@@ -2,22 +2,24 @@
 
 .orderContainer {
   width: 95vw;
-  min-height: 80vh;
-  margin: 2vh auto;
+  height: auto;
+  margin: auto;
   @include flexbox;
   @include flex-direction(row);
   @include justify-content(center);
   @include align-items(center);
   @include flex-wrap(wrap);
-  overflow: auto;
+  overflow: hidden;
 }
+
 .order {
   min-width: 20vw;
   min-height: 50vh;
-  margin: 1.5em;
+  margin: 1em;
   background: white;
   text-align: center;
   color: black;
+  overflow: auto;
 
   & > div {
     border: 2px dashed $gray !important;
@@ -27,9 +29,11 @@
     p,
     h3,
     h4 {
-      padding: 0px;
+      width: 90%;
       margin: 0px;
       display: inline;
+      text-overflow: ellipsis;
+      overflow: auto;
     }
     padding: 1em 0.2em;
     margin: 0.3em;
@@ -38,7 +42,7 @@
 
 .personal {
   @include justify-content(space-around);
-  height: 15vh;
+  height: 20vh;
 
   &::before {
     content: "User info";
@@ -71,11 +75,11 @@
 
 .choice {
   @include justify-content(space-between);
-  height: 45vh;
+  min-height: 65vh;
   div,
   span {
     padding: 0px;
-    margin: 0.3em auto;
+    margin: 0.2em auto;
   }
 
   &::before {
