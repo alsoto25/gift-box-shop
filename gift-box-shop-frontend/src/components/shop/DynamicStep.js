@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import styles from '../../../styles/components/shop/DynamicStep.module.scss'
+import styles from '/public/styles/components/shop/DynamicStep.module.scss'
 import Swal from 'sweetalert2'
 import { useShopReducer } from '../../utils'
 

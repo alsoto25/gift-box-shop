@@ -3,7 +3,8 @@ import React, { useState, useEffect } from 'react'
 import ContactForm from '../src/components/contact/ContactForm'
 import PageWrapper from '../src/components/global/PageWrapper'
 
-import styles from '../styles/pages/Contact.module.scss'
+import { useGetData } from '../src/utils'
+import styles from '/public/styles/pages/Contact.module.scss'
 
 export default function Contact() {
     const [contact, error] = useGetData('http://localhost:3001/contact/getContactInfo')

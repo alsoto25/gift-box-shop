@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react'
-import styles from '../styles/pages/Shop.module.scss'
+import styles from '/public/styles/pages/Shop.module.scss'
 
 import PageWrapper from '../src/components/global/PageWrapper'
 import ShopBreadcrumbs from '../src/components/shop/ShopBreadcrumbs'

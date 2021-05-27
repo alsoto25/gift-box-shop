@@ -4,23 +4,28 @@ import axios from 'axios'
 export const useGetData = (url, startState = {}) => {
     const [data, setData] = useState(startState)
     const [error, setError] = useState(false)
+    const [loading, setLoading] = useState(true)
 
     useEffect(() => {
         axios
             .get(url)
             .then((res) => {
+                console.log(res)
                 if (res.request.statusText == 'OK') {
+                    setLoading(false)
                     setData(res.data[Object.keys(res.data)[0]])
                 } else if (res.request.statusText == 'INTERNAL_SERVER_ERROR') {
                     setError(true)
+                    setLoading(false)
                 }
             })
             .catch(() => {
                 setError(true)
+                setLoading(false)
             })
     }, [])
 
-    return [data, error]
+    return [data, error, loading]
 }
 
 // Shop Context

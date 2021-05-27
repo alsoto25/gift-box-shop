@@ -1,4 +1,4 @@
-import styles from '../../../styles/components/shop/ShopBreadcrumbs.module.scss'
+import styles from '/public/styles/components/shop/ShopBreadcrumbs.module.scss'
 import Swal from 'sweetalert2'
 import { useShopReducer } from '../../utils'
 

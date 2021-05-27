@@ -3,7 +3,7 @@ import Slider from 'react-slick'
 
 import 'slick-carousel/slick/slick.css'
 import 'slick-carousel/slick/slick-theme.css'
-import styles from '../../../styles/components/home/Carousel.module.scss'
+import styles from '/public/styles/components/home/Carousel.module.scss'
 
 export default function SliderComponent({ slides }) {
     const settings = {
@@ -20,6 +20,7 @@ export default function SliderComponent({ slides }) {
         lazyLoad: true,
         pauseOnHover: true,
     }
+
     return (
         <Slider {...settings}>
             {slides.map((slide, index) => (
