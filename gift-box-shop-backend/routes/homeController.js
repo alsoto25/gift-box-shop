@@ -17,8 +17,8 @@ router.get('/getHomeInfo', (req, res,next) => {
 });
 
 router.post('/setHomeInfo', (req, res,next) => {
-    db.ref('home').set(req.body.images, (snapshot) => {
-        console.log(snapshot)
+    console.log(req.body)
+    db.ref('home/slides').set(req.body.slidesList, (snapshot) => {
         res.status(HttpStatus.NO_CONTENT).json();
     })
     .catch( err => {
