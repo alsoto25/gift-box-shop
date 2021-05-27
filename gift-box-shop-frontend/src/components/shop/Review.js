@@ -1,6 +1,6 @@
 import React, { useRef } from 'react'
 // import { contactResponse } from '../../../test/contactResponse'
-import styles from '../../../styles/components/shop/Review.module.scss'
+import styles from '/public/styles/components/shop/Review.module.scss'
 import { useShopReducer } from '../../utils'
 
 export default function Review({ isActive, stepsData }) {

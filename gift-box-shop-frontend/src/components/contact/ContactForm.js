@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
 import Swal from 'sweetalert2'
-import styles from '../../../styles/pages/Contact.module.scss'
+import styles from '/public/styles/pages/Contact.module.scss'
 
 export default function ContactForm() {
     const [alertMessage, setAlertMessage] = useState('')

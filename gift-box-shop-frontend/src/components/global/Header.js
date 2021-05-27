@@ -1,7 +1,7 @@
 import Link from 'next/link'
 import Menu from './Menu'
 
-import styles from '../../../styles/components/global/Header.module.scss'
+import styles from '/public/styles/components/global/Header.module.scss'
 
 export default function Header() {
     return (

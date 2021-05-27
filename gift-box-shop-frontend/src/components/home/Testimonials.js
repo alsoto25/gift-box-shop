@@ -1,5 +1,5 @@
 import React from 'react'
-import styles from '../../../styles/components/home/Testimonials.module.scss'
+import styles from '/public/styles/components/home/Testimonials.module.scss'
 
 function Testimonial({ content }) {
     return (

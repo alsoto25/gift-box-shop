@@ -2,7 +2,7 @@ import Link from 'next/link'
 import { useState } from 'react'
 import { useRouter } from 'next/router'
 
-import styles from '../../../styles/components/global/Header.module.scss'
+import styles from '/public/styles/components/global/Header.module.scss'
 
 const menuItems = [
     {

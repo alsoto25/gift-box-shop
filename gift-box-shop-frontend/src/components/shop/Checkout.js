@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 import axios from 'axios'
 import Swal from 'sweetalert2'
-import styles from '../../../styles/components/shop/Checkout.module.scss'
+import styles from '/public/styles/components/shop/Checkout.module.scss'
 import { useShopReducer } from '../../utils'
 
 export default function Checkout({ isActive }) {

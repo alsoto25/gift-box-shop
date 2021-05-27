@@ -1,11 +1,7 @@
 import React, { useState, useEffect } from 'react'
 import PageWrapper from '../src/components/global/PageWrapper'
-import styles from '../styles/pages/About.module.scss'
+import styles from '/public/styles/pages/About.module.scss'
 import { useGetData } from '../src/utils'
-import axios from 'axios'
-
-// Testing imports
-import { aboutResponse } from '../test/aboutResponse'
 
 export default function AboutMe() {
     const [about, error] = useGetData('http://localhost:3001/about/getAboutInfo')

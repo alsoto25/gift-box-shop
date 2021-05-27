@@ -1,6 +1,6 @@
 import React from 'react'
 import Link from 'next/link'
-import styles from '../../../styles/components/home/ShopSocials.module.scss'
+import styles from '/public/styles/components/home/ShopSocials.module.scss'
 
 export default function ShopSocials({ content, className }) {
     return (
