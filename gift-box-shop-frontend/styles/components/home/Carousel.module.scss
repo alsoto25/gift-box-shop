@@ -1,8 +1,9 @@
 @import '../../utils.scss';
 
 .slides {
+    width: 100%;
+    margin: 2vh auto;
     position: relative;
-
     li button::before {
         color: white !important;
     }
