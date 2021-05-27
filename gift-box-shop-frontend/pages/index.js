@@ -12,7 +12,6 @@ export default function Home() {
     const [content, setContent] = useState(null)
 
     useEffect(() => {
-        // setContent(homeResponse)
         //Fetch/Axios Request API
         axios
             .get('http://localhost:3001/home/getHomeInfo')
@@ -33,7 +32,7 @@ export default function Home() {
         <PageWrapper>
             {content && (
                 <>
-                    <Carousel slides={content.slides} />
+                    <Carousel slidesList={content.slides} />
                     <Testimonials
                         className={styles['testimonials-container']}
                         content={content.testimonials}

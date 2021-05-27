@@ -16,7 +16,6 @@ export default function Orders() {
       .get("http://localhost:3001/shopSteps/getOrders")
       .then((res) => {
         if (res.request.statusText === "OK") {
-          console.log("RES", res.data.ordersResponse);
           setOrders(res.data.ordersResponse);
         } else if (res.request.statusText === "INTERNAL_SERVER_ERROR") {
           console.log("ERROR", res);
@@ -32,81 +31,75 @@ export default function Orders() {
       <>
         {userChoices["box-contents-dropdown"] && (
           <div className={` ${styles["choice"]}`}>
-            {isActive && (
-              <aside>
-                <img
-                  src={
-                    "https://cdn.shopify.com/s/files/1/0063/5942/products/Rose_Gold_with_Gold_Foil_Beau_Bella_2000x.jpg?v=1591294565"
-                  }
-                />
-                <p>Response</p>
-              </aside>
-            )}
-            <aside>
-              <div>
-                {stepsResponse.steps.map((step, index) => {
-                  if (
-                    stepsResponse.steps.find(
-                      (stp) => stp.id === step.id && step.id !== "review-step"
-                    )
-                  ) {
-                    return (
-                      <div key={step.id}>
-                        <h3>{step.title}</h3>
-                        {step.options &&
-                          step.options.map((option) =>
-                            option.dropdowns.map((dropdown) => {
-                              if (
+            {stepsResponse.steps.map((step, index) => {
+              if (
+                stepsResponse.steps.find(
+                  (stp) => stp.id === step.id && step.id !== "review-step"
+                )
+              ) {
+                return (
+                  <div key={step.id}>
+                    <h3>{step.title}</h3>
+                    {step.options &&
+                      step.options.map((option) =>
+                        option.dropdowns.map((dropdown) => {
+                          if (
+                            dropdown.options.find(
+                              (opt) =>
+                                userChoices[dropdown.id] === opt.id &&
                                 dropdown.options.find(
-                                  (opt) =>
-                                    userChoices[dropdown.id] === opt.id &&
+                                  (opti) => userChoices[dropdown.id] === opti.id
+                                ).price
+                            )
+                          ) {
+                            return (
+                              <div key={option.id}>
+                                <div>
+                                  <span>
+                                    {userChoices[dropdown.id] &&
+                                      dropdown.options.find(
+                                        (opt) =>
+                                          userChoices[dropdown.id] === opt.id
+                                      ).title}
+                                  </span>
+                                  <span>
+                                    {userChoices[userChoices[dropdown.id]] &&
+                                      ": " +
+                                        userChoices[userChoices[dropdown.id]]}
+                                  </span>
+                                </div>
+                              </div>
+                            );
+                          } else if (
+                            dropdown.options.find(
+                              (opt) => userChoices[dropdown.id] === opt.id
+                            )
+                          ) {
+                            return (
+                              <div>
+                                <span>
+                                  {userChoices[dropdown.id] &&
                                     dropdown.options.find(
-                                      (opti) =>
-                                        userChoices[dropdown.id] === opti.id
-                                    ).price
-                                )
-                              ) {
-                                return (
-                                  <div key={option.id}>
-                                    <div>
-                                      <span>
-                                        {userChoices[dropdown.id] &&
-                                          dropdown.options.find(
-                                            (opt) =>
-                                              userChoices[dropdown.id] ===
-                                              opt.id
-                                          ).title}
-                                      </span>
-                                    </div>
-                                  </div>
-                                );
-                              } else if (
-                                dropdown.options.find(
-                                  (opt) => userChoices[dropdown.id] === opt.id
-                                )
-                              ) {
-                                return (
-                                  <div>
-                                    <span>
-                                      {userChoices[dropdown.id] &&
-                                        dropdown.options.find(
-                                          (opt) =>
-                                            userChoices[dropdown.id] === opt.id
-                                        ).title}
-                                    </span>
-                                  </div>
-                                );
-                              }
-                            })
-                          )}
-                      </div>
-                    );
-                  } else {
-                    return null;
-                  }
-                })}
-              </div>
-            </aside>
+                                      (opt) =>
+                                        userChoices[dropdown.id] === opt.id
+                                    ).title}
+                                </span>
+                                <span>
+                                  {userChoices[userChoices[dropdown.id]] &&
+                                    ": " +
+                                      userChoices[userChoices[dropdown.id]]}
+                                </span>
+                              </div>
+                            );
+                          }
+                        })
+                      )}
+                  </div>
+                );
+              } else {
+                return null;
+              }
+            })}
           </div>
         )}
       </>
